@@ -1,0 +1,52 @@
+{
+    "success": true,
+    "data":{
+       "topicList": [{
+        "id": 1,
+        "title": "社会热点",
+        "imgUrl": "http://upload.jianshu.io/collections/images/333523/mymInbq_%E5%89%AF%E6%9C%AC.jpg" 
+    },{
+        "id": 2,
+        "title": "手绘",
+        "imgUrl": "http://upload.jianshu.io/collections/images/2194/android.graphics.Bitmap_6dd6427.jpeg"
+    }],
+    "articleList": [{
+        "id": 1,
+        "title": "观陈果教授讲课有感",
+        "desc": "复旦思修拂妙语，陈堂果论醒迷途。 清风种下达观树，俊雅博学见忘俗。 自律谦卑知感慰，哲言有物暖舳舻。 心灵偶像光辉路，汗洒德操礼敬书。 【注】舳...",
+        "imgUrl": "http://upload-images.jianshu.io/upload_images/9356452-31efebbce8edddd2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240"
+    },{
+        "id": 2,
+        "title": "吃饭，是最重要的小事。",
+        "desc": "开门七件事，柴米油盐酱醋茶。 为家人做一顿丰盛的早餐，是活力满满的一天开始的“仪式感”。 我是一个上班族，一个职场妈妈。 公司离家25公里，早高...",
+        "imgUrl": "http://upload-images.jianshu.io/upload_images/14741776-8407fc2b5fc59a4c.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240"
+    },{
+        "id": 3,
+        "title": "观陈果教授讲课有感2",
+        "desc": "复旦思修拂妙语，陈堂果论醒迷途。 清风种下达观树，俊雅博学见忘俗。 自律谦卑知感慰，哲言有物暖舳舻。 心灵偶像光辉路，汗洒德操礼敬书。 【注】舳...",
+        "imgUrl": "http://upload-images.jianshu.io/upload_images/9356452-31efebbce8edddd2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240"
+    },{
+        "id": 4,
+        "title": "吃饭，是最重要的小事2。",
+        "desc": "开门七件事，柴米油盐酱醋茶。 为家人做一顿丰盛的早餐，是活力满满的一天开始的“仪式感”。 我是一个上班族，一个职场妈妈。 公司离家25公里，早高...",
+        "imgUrl": "http://upload-images.jianshu.io/upload_images/14741776-8407fc2b5fc59a4c.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240"
+    }],
+    "recommendList": [{
+        "id": 1,
+        "imgUrl": "http://pmwmye8w0.bkt.clouddn.com/banner-1.png"
+    },{
+        "id": 2,
+        "imgUrl": "http://pmwmye8w0.bkt.clouddn.com/banner-2.png"
+    },{
+        "id": 3,
+        "imgUrl": "http://pmwmye8w0.bkt.clouddn.com/banner-3.png"
+    },{
+        "id": 4,
+        "imgUrl": "http://pmwmye8w0.bkt.clouddn.com/banner-4.png"
+    },{
+        "id": 5,
+        "imgUrl": "http://pmwmye8w0.bkt.clouddn.com/banner-5.png"
+    }]
+
+    }
+}

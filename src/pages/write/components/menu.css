@@ -1,0 +1,109 @@
+#collection-menu {
+    margin-top: -10px;
+    margin-left: 70px;
+}
+
+#home-menu {
+    margin-top: 0px;
+    margin-left: 83%;
+}
+
+#article-menu{
+    margin-top: 30px;
+    margin-left: 160px;
+}
+
+#update-icon,#delete-icon,#move-icon,#publish-icon{
+    font-size:20px;
+    float: left;
+    color: #595959;
+    margin: 0px 5px;
+}
+
+#publish-icon{
+    font-size: 23px;
+    margin: 0px 6px 0px 4px;
+}
+
+#setting-icon,#like-icon, #collect-icon,#home-icon,#logout-icon,.published{
+    font-size:20px;
+    float: left;
+    color: #ea6f5a;
+    margin: 0px 10px;
+}
+
+.contextmenu {
+    all: initial;
+    position: absolute;
+    width: 120px;
+    padding: 0;
+    background: #FFFFFF;
+    border-radius: 5px;
+    list-style: none;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    overflow: hidden;
+    z-index: 999999;
+  }
+
+  .homecontextmenu {
+    width: 165px;
+  }
+
+  .contextmenu li {
+    border-bottom: 1px solid rgb(217, 217, 217);
+    transition: ease .2s;
+    cursor: pointer;
+  }
+
+  .homecontextmenu li {
+    height: 50px;
+    border-bottom: 0;
+  }
+  
+  .contextmenu li span {
+    display: block;
+    padding: 10px;
+    color: #595959;
+    text-decoration: none;
+    transition: ease .2s;
+  }
+
+  .homecontextmenu li span {
+    float: left;
+    padding: 13px 10px;
+  }
+  
+  .contextmenu li:hover {
+    border-bottom: 1px solid #404040;
+    background: #666;
+  }
+
+  .homecontextmenu li:hover {
+    border-bottom: 0;
+    background: #f5f5f5;
+  }
+  
+  .contextmenu li:hover span {
+    color: #FFFFFF;
+  }
+
+  .homecontextmenu li:hover span {
+    color: #333;
+  }
+  
+
+  .contextmenu li:hover #update-icon{
+    color: #FFFFFF;
+  }
+
+  .contextmenu li:hover #delete-icon{
+    color: #FFFFFF;
+  }
+
+  .contextmenu li:hover #move-icon{
+    color: #FFFFFF;
+  }
+
+  .contextmenu li:hover #publish-icon{
+    color: #FFFFFF;
+  }

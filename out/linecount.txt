@@ -1,0 +1,236 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-02-23 19:41:07
+count workspace : c:\Users\WORA\Desktop\jianshu
+total files : 106
+total code lines : 23419
+total comment lines : 151
+total blank lines : 631
+
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 17675, comment is 0, blank is 0.
+package.json, code is 39, comment is 0, blank is 1.
+public\api\content.json, code is 4, comment is 0, blank is 0.
+public\api\detail.json, code is 7, comment is 0, blank is 0.
+public\api\headerList.json, code is 4, comment is 0, blank is 2.
+public\api\home.json, code is 51, comment is 0, blank is 1.
+public\api\homeList.json, code is 24, comment is 0, blank is 0.
+public\api\login.json, code is 4, comment is 0, blank is 0.
+public\api\write.json, code is 34, comment is 0, blank is 0.
+public\index.html, code is 29, comment is 0, blank is 6.
+public\manifest.json, code is 15, comment is 0, blank is 0.
+README.md, code is 37, comment is 12, blank is 31.
+src\App.js, code is 35, comment is 0, blank is 4.
+src\common\header\index.js, code is 223, comment is 10, blank is 15.
+src\common\header\store\actionCreators.js, code is 34, comment is 1, blank is 9.
+src\common\header\store\constants.js, code is 6, comment is 0, blank is 0.
+src\common\header\store\index.js, code is 4, comment is 0, blank is 1.
+src\common\header\store\reducer.js, code is 30, comment is 9, blank is 3.
+src\common\header\style.js, code is 207, comment is 1, blank is 17.
+src\common\uploader\uploader.jsx, code is 68, comment is 15, blank is 7.
+src\index.js, code is 6, comment is 0, blank is 2.
+src\pages\all-writers\components\FollowButton.jsx, code is 62, comment is 2, blank is 6.
+src\pages\all-writers\components\style.js, code is 138, comment is 0, blank is 8.
+src\pages\all-writers\components\Writerblcok.jsx, code is 42, comment is 0, blank is 8.
+src\pages\all-writers\index.js, code is 38, comment is 15, blank is 5.
+src\pages\all-writers\store\actionCreators.js, code is 18, comment is 0, blank is 3.
+src\pages\all-writers\store\constants.js, code is 1, comment is 0, blank is 1.
+src\pages\all-writers\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\all-writers\store\reducer.js, code is 13, comment is 0, blank is 3.
+src\pages\detail\index.js, code is 86, comment is 0, blank is 5.
+src\pages\detail\loadable.js, code is 9, comment is 7, blank is 3.
+src\pages\detail\store\actionCreators.js, code is 17, comment is 0, blank is 3.
+src\pages\detail\store\constants.js, code is 1, comment is 0, blank is 0.
+src\pages\detail\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\detail\store\reducer.js, code is 13, comment is 0, blank is 2.
+src\pages\detail\style.js, code is 88, comment is 0, blank is 8.
+src\pages\home-user\components\style.js, code is 104, comment is 1, blank is 10.
+src\pages\home-user\index.js, code is 102, comment is 1, blank is 5.
+src\pages\home-user\store\actionCreators.js, code is 40, comment is 0, blank is 5.
+src\pages\home-user\store\constants.js, code is 1, comment is 0, blank is 1.
+src\pages\home-user\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\home-user\store\reducer.js, code is 33, comment is 0, blank is 3.
+src\pages\home\components\List.jsx, code is 61, comment is 0, blank is 7.
+src\pages\home\components\PImgPoint.jsx, code is 29, comment is 0, blank is 2.
+src\pages\home\components\PlayImage.css, code is 52, comment is 0, blank is 7.
+src\pages\home\components\PlayImage.jsx, code is 26, comment is 0, blank is 1.
+src\pages\home\components\PlayImgApp.jsx, code is 90, comment is 0, blank is 3.
+src\pages\home\components\PlayImgbut.jsx, code is 24, comment is 0, blank is 2.
+src\pages\home\components\PlayImgPoints.jsx, code is 18, comment is 0, blank is 2.
+src\pages\home\components\Recommend.jsx, code is 24, comment is 0, blank is 2.
+src\pages\home\components\style.js, code is 190, comment is 0, blank is 21.
+src\pages\home\components\Topic.jsx, code is 29, comment is 3, blank is 2.
+src\pages\home\components\Writer.jsx, code is 112, comment is 1, blank is 7.
+src\pages\home\index.js, code is 66, comment is 1, blank is 8.
+src\pages\home\store\actionCreators.js, code is 111, comment is 1, blank is 14.
+src\pages\home\store\constants.js, code is 6, comment is 0, blank is 1.
+src\pages\home\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\home\store\reducer.js, code is 61, comment is 0, blank is 4.
+src\pages\login\components\styled.js, code is 163, comment is 0, blank is 13.
+src\pages\login\login.jsx, code is 71, comment is 0, blank is 4.
+src\pages\login\register.jsx, code is 115, comment is 1, blank is 6.
+src\pages\login\store\actionCreators.js, code is 100, comment is 1, blank is 19.
+src\pages\login\store\constants.js, code is 7, comment is 0, blank is 0.
+src\pages\login\store\index.js, code is 4, comment is 0, blank is 1.
+src\pages\login\store\reducer.js, code is 41, comment is 3, blank is 4.
+src\pages\setting-user\components\SettingLeft.jsx, code is 70, comment is 0, blank is 5.
+src\pages\setting-user\components\SettingRightBasic.jsx, code is 100, comment is 2, blank is 6.
+src\pages\setting-user\components\SettingRightProfile.jsx, code is 88, comment is 2, blank is 8.
+src\pages\setting-user\components\style.js, code is 53, comment is 0, blank is 5.
+src\pages\setting-user\components\table.css, code is 85, comment is 0, blank is 2.
+src\pages\setting-user\index.js, code is 64, comment is 1, blank is 5.
+src\pages\setting-user\store\actionCreators.js, code is 58, comment is 1, blank is 8.
+src\pages\setting-user\store\constants.js, code is 4, comment is 0, blank is 0.
+src\pages\setting-user\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\setting-user\store\reducer.js, code is 41, comment is 0, blank is 4.
+src\pages\write\components\articleList.jsx, code is 129, comment is 0, blank is 5.
+src\pages\write\components\collectionList.jsx, code is 127, comment is 0, blank is 8.
+src\pages\write\components\editor.jsx, code is 101, comment is 3, blank is 8.
+src\pages\write\components\menu.css, code is 89, comment is 0, blank is 20.
+src\pages\write\components\styled.js, code is 278, comment is 0, blank is 20.
+src\pages\write\index.js, code is 47, comment is 4, blank is 6.
+src\pages\write\store\actionCreators.js, code is 208, comment is 1, blank is 29.
+src\pages\write\store\constants.js, code is 12, comment is 0, blank is 2.
+src\pages\write\store\index.js, code is 4, comment is 0, blank is 1.
+src\pages\write\store\reducer.js, code is 57, comment is 0, blank is 3.
+src\statics\008.jpg, it is a binary file.
+src\statics\009.jpg, it is a binary file.
+src\statics\aaa.jpg, it is a binary file.
+src\statics\css\style.css, code is 49, comment is 0, blank is 5.
+src\statics\dd.jpg, it is a binary file.
+src\statics\iconfont\demo.css, code is 435, comment is 19, blank is 85.
+src\statics\iconfont\demo_index.html, code is 355, comment is 2, blank is 42.
+src\statics\iconfont\iconfont.css, code is 42, comment is 0, blank is 11.
+src\statics\iconfont\iconfont.eot, it is a binary file.
+src\statics\iconfont\iconfont.js, code is 1, comment is 0, blank is 0.
+src\statics\iconfont\iconfont.svg, code is 32, comment is 0, blank is 24.
+src\statics\iconfont\iconfont.ttf, it is a binary file.
+src\statics\iconfont\iconfont.woff, it is a binary file.
+src\statics\iconfont\iconfont.woff2, it is a binary file.
+src\statics\js\index.js, code is 36, comment is 28, blank is 1.
+src\statics\js\jquery.min.js, code is 1, comment is 1, blank is 0.
+src\statics\logo.png, it is a binary file.
+src\store\index.js, code is 8, comment is 0, blank is 3.
+src\store\reducer.js, code is 20, comment is 0, blank is 1.
+src\style.js, code is 45, comment is 1, blank is 1.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-02-23 19:42:00
+count workspace : c:\Users\WORA\Desktop\jianshu
+total files : 106
+total code lines : 23419
+total comment lines : 151
+total blank lines : 631
+
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 17675, comment is 0, blank is 0.
+package.json, code is 39, comment is 0, blank is 1.
+public\api\content.json, code is 4, comment is 0, blank is 0.
+public\api\detail.json, code is 7, comment is 0, blank is 0.
+public\api\headerList.json, code is 4, comment is 0, blank is 2.
+public\api\home.json, code is 51, comment is 0, blank is 1.
+public\api\homeList.json, code is 24, comment is 0, blank is 0.
+public\api\login.json, code is 4, comment is 0, blank is 0.
+public\api\write.json, code is 34, comment is 0, blank is 0.
+public\index.html, code is 29, comment is 0, blank is 6.
+public\manifest.json, code is 15, comment is 0, blank is 0.
+README.md, code is 37, comment is 12, blank is 31.
+src\App.js, code is 35, comment is 0, blank is 4.
+src\common\header\index.js, code is 223, comment is 10, blank is 15.
+src\common\header\store\actionCreators.js, code is 34, comment is 1, blank is 9.
+src\common\header\store\constants.js, code is 6, comment is 0, blank is 0.
+src\common\header\store\index.js, code is 4, comment is 0, blank is 1.
+src\common\header\store\reducer.js, code is 30, comment is 9, blank is 3.
+src\common\header\style.js, code is 207, comment is 1, blank is 17.
+src\common\uploader\uploader.jsx, code is 68, comment is 15, blank is 7.
+src\index.js, code is 6, comment is 0, blank is 2.
+src\pages\all-writers\components\FollowButton.jsx, code is 62, comment is 2, blank is 6.
+src\pages\all-writers\components\style.js, code is 138, comment is 0, blank is 8.
+src\pages\all-writers\components\Writerblcok.jsx, code is 42, comment is 0, blank is 8.
+src\pages\all-writers\index.js, code is 38, comment is 15, blank is 5.
+src\pages\all-writers\store\actionCreators.js, code is 18, comment is 0, blank is 3.
+src\pages\all-writers\store\constants.js, code is 1, comment is 0, blank is 1.
+src\pages\all-writers\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\all-writers\store\reducer.js, code is 13, comment is 0, blank is 3.
+src\pages\detail\index.js, code is 86, comment is 0, blank is 5.
+src\pages\detail\loadable.js, code is 9, comment is 7, blank is 3.
+src\pages\detail\store\actionCreators.js, code is 17, comment is 0, blank is 3.
+src\pages\detail\store\constants.js, code is 1, comment is 0, blank is 0.
+src\pages\detail\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\detail\store\reducer.js, code is 13, comment is 0, blank is 2.
+src\pages\detail\style.js, code is 88, comment is 0, blank is 8.
+src\pages\home-user\components\style.js, code is 104, comment is 1, blank is 10.
+src\pages\home-user\index.js, code is 102, comment is 1, blank is 5.
+src\pages\home-user\store\actionCreators.js, code is 40, comment is 0, blank is 5.
+src\pages\home-user\store\constants.js, code is 1, comment is 0, blank is 1.
+src\pages\home-user\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\home-user\store\reducer.js, code is 33, comment is 0, blank is 3.
+src\pages\home\components\List.jsx, code is 61, comment is 0, blank is 7.
+src\pages\home\components\PImgPoint.jsx, code is 29, comment is 0, blank is 2.
+src\pages\home\components\PlayImage.css, code is 52, comment is 0, blank is 7.
+src\pages\home\components\PlayImage.jsx, code is 26, comment is 0, blank is 1.
+src\pages\home\components\PlayImgApp.jsx, code is 90, comment is 0, blank is 3.
+src\pages\home\components\PlayImgbut.jsx, code is 24, comment is 0, blank is 2.
+src\pages\home\components\PlayImgPoints.jsx, code is 18, comment is 0, blank is 2.
+src\pages\home\components\Recommend.jsx, code is 24, comment is 0, blank is 2.
+src\pages\home\components\style.js, code is 190, comment is 0, blank is 21.
+src\pages\home\components\Topic.jsx, code is 29, comment is 3, blank is 2.
+src\pages\home\components\Writer.jsx, code is 112, comment is 1, blank is 7.
+src\pages\home\index.js, code is 66, comment is 1, blank is 8.
+src\pages\home\store\actionCreators.js, code is 111, comment is 1, blank is 14.
+src\pages\home\store\constants.js, code is 6, comment is 0, blank is 1.
+src\pages\home\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\home\store\reducer.js, code is 61, comment is 0, blank is 4.
+src\pages\login\components\styled.js, code is 163, comment is 0, blank is 13.
+src\pages\login\login.jsx, code is 71, comment is 0, blank is 4.
+src\pages\login\register.jsx, code is 115, comment is 1, blank is 6.
+src\pages\login\store\actionCreators.js, code is 100, comment is 1, blank is 19.
+src\pages\login\store\constants.js, code is 7, comment is 0, blank is 0.
+src\pages\login\store\index.js, code is 4, comment is 0, blank is 1.
+src\pages\login\store\reducer.js, code is 41, comment is 3, blank is 4.
+src\pages\setting-user\components\SettingLeft.jsx, code is 70, comment is 0, blank is 5.
+src\pages\setting-user\components\SettingRightBasic.jsx, code is 100, comment is 2, blank is 6.
+src\pages\setting-user\components\SettingRightProfile.jsx, code is 88, comment is 2, blank is 8.
+src\pages\setting-user\components\style.js, code is 53, comment is 0, blank is 5.
+src\pages\setting-user\components\table.css, code is 85, comment is 0, blank is 2.
+src\pages\setting-user\index.js, code is 64, comment is 1, blank is 5.
+src\pages\setting-user\store\actionCreators.js, code is 58, comment is 1, blank is 8.
+src\pages\setting-user\store\constants.js, code is 4, comment is 0, blank is 0.
+src\pages\setting-user\store\index.js, code is 4, comment is 0, blank is 0.
+src\pages\setting-user\store\reducer.js, code is 41, comment is 0, blank is 4.
+src\pages\write\components\articleList.jsx, code is 129, comment is 0, blank is 5.
+src\pages\write\components\collectionList.jsx, code is 127, comment is 0, blank is 8.
+src\pages\write\components\editor.jsx, code is 101, comment is 3, blank is 8.
+src\pages\write\components\menu.css, code is 89, comment is 0, blank is 20.
+src\pages\write\components\styled.js, code is 278, comment is 0, blank is 20.
+src\pages\write\index.js, code is 47, comment is 4, blank is 6.
+src\pages\write\store\actionCreators.js, code is 208, comment is 1, blank is 29.
+src\pages\write\store\constants.js, code is 12, comment is 0, blank is 2.
+src\pages\write\store\index.js, code is 4, comment is 0, blank is 1.
+src\pages\write\store\reducer.js, code is 57, comment is 0, blank is 3.
+src\statics\008.jpg, it is a binary file.
+src\statics\009.jpg, it is a binary file.
+src\statics\aaa.jpg, it is a binary file.
+src\statics\css\style.css, code is 49, comment is 0, blank is 5.
+src\statics\dd.jpg, it is a binary file.
+src\statics\iconfont\demo.css, code is 435, comment is 19, blank is 85.
+src\statics\iconfont\demo_index.html, code is 355, comment is 2, blank is 42.
+src\statics\iconfont\iconfont.css, code is 42, comment is 0, blank is 11.
+src\statics\iconfont\iconfont.eot, it is a binary file.
+src\statics\iconfont\iconfont.js, code is 1, comment is 0, blank is 0.
+src\statics\iconfont\iconfont.svg, code is 32, comment is 0, blank is 24.
+src\statics\iconfont\iconfont.ttf, it is a binary file.
+src\statics\iconfont\iconfont.woff, it is a binary file.
+src\statics\iconfont\iconfont.woff2, it is a binary file.
+src\statics\js\index.js, code is 36, comment is 28, blank is 1.
+src\statics\js\jquery.min.js, code is 1, comment is 1, blank is 0.
+src\statics\logo.png, it is a binary file.
+src\store\index.js, code is 8, comment is 0, blank is 3.
+src\store\reducer.js, code is 20, comment is 0, blank is 1.
+src\style.js, code is 45, comment is 1, blank is 1.
+===============================================================================

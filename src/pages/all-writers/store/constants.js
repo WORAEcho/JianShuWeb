@@ -1,0 +1,2 @@
+export const SET_ALL_WRITER_WITH_PROFILE = 'home-user/SET_ALL_WRITER_WITH_PROFILE';
+

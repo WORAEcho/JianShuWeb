@@ -1,0 +1,14 @@
+export const CLEAR_STORE = 'write/CLEAR_STORE';
+export const CHANGE_COLLECTION_LIST = 'write/CHANGE_COLLECTION_LIST';
+export const CHANGE_ARTICLE_LIST = 'write/CHANGE_ARTICLE_LIST';
+export const CHANGE_COLLECTION_ID = 'write/CHANGE_COLLECTION_ID';
+export const CHANGE_ARTICLE_ID = 'write/CHANGE_ARTICLE_ID';
+export const CHANGE_ARTICLE = 'write/CHANGE_ARTICLE';
+export const CHANGE_CONTENT = 'write/CHANGE_CONTENT';
+export const SET_EDITOR = 'write/SET_EDITOR';
+export const IFSAVED = 'write/IFSAVED';
+export const HIDE_EDITOR = 'write/HIDE_EDITOR';
+export const SET_PUBLISHED_ARTICLE_LIST = 'write/SET_PUBLISHED_ARTICLE_LIST';
+export const CHANGE_PUBLISHED_ARTICLE_LIST = 'write/CHANGE_PUBLISHED_ARTICLE_LIST';
+
+
