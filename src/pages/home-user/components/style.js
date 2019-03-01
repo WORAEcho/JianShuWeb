@@ -48,6 +48,9 @@ export const Head =styled.div`
             background: none;        
         }
     }
+    .icon {
+        margin: 0 0 0 5px;
+    }
 `;
 
 export const Avatar =styled.div`
@@ -92,22 +95,31 @@ export const Num =styled.p`
     color: #333;
 `;
 
+
+export const TriggerMenuContainer =styled.div`
+    border-bottom: 1px solid #f0f0f0;
+`;
+
 export const TriggerMenu =styled.p`
     display: inline-block;
     padding: 13px 20px;
     color: #969696;
     cursor: pointer;
+    margin: 10px 0 0 0;
     span {
         font-size: 15px;
         font-weight: 700;
-        // line-height: 25px;
     }
     .icon {
         margin: 0 10px 0 0;
     }
-    &:hover {
+    &.active {
         color: #646464;
         border-bottom: 2px solid rgb(100, 100, 100);
+    }
+    &.sleep:hover {
+        color: #646464;
+        border-bottom: 1px solid rgb(100, 100, 100);
     }
 `;
 

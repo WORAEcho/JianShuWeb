@@ -1,21 +1,20 @@
 import React, { PureComponent } from 'react';
-import { ListItem, ListInfo, LoadMore,NoMore } from './style';
+import { ListItem, ListInfo, LoadMore,NoMore } from '../../home/components/style';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-class List extends PureComponent {
+class ArticleList extends PureComponent {
     render(){
-        const { list,getMoreList,articlePageCount,articlePageNum } =this.props;
-
+        const { getMoreList,articlePageCount,articlePageNum,articleList,pageSum,pageNum,writerId } =this.props;
         return (
             <div>
                 {
-                    list.map((item)=>{
+                    articleList.map((item)=>{
                         const content = item.get('pure_content')+"";
                         return (
-                            <Link key={item.get('articleId')} to={'/detail/' + item.get('articleId')}>
+                            <Link style={{textDecoration: 'none'}} key={item.get('id')} to={'/detail/' + item.get('id')}>
                                 <ListItem>
                                 <ListInfo>
                                     <h3 className='title'>{item.get('title')}</h3>
@@ -23,7 +22,10 @@ class List extends PureComponent {
                                     dangerouslySetInnerHTML = 
                                     {{__html: content.length <= 60 ? content : content.substr(0,60)+'...'}}>
                                     </p>
-                                    <span className='article-bottom'>{item.get('nickname')}</span>
+                                    <svg className='article-bottom icon' aria-hidden="true">
+                                        <use xlinkHref="#icon-liulanliang"></use>
+                                    </svg>
+                                    <span className='article-bottom'>999</span>
                                     <svg className='article-bottom icon' aria-hidden="true">
                                         <use xlinkHref="#icon-pinglun2"></use>
                                     </svg>
@@ -40,30 +42,37 @@ class List extends PureComponent {
                         );
                     })
                 }
-
-                {
-                    articlePageCount >= articlePageNum ?
-                    <LoadMore onClick={()=>getMoreList(articlePageNum,articlePageCount)}>阅读更多</LoadMore> :
+                {   articleList.size === 0 ? 
+                    <NoMore>该用户暂未发布文章。</NoMore> :
+                    pageSum >= pageNum ?
+                    <LoadMore onClick={()=>this.getMoreArticleList(writerId,pageNum,10)}>阅读更多</LoadMore> :
                     <NoMore>已经到底啦！</NoMore>
                 }
 
             </div>
         )
     }
-    componentDidMount(){
-        this.props.getArticleList();
+    getMoreArticleList(writerId,pageNum,pageSize){
+        if(pageNum <= this.props.pageSum){
+            this.props.getMoreArticleList(writerId,pageNum,pageSize);
+        }else{
+            alert('已经到底啦！')
+        }
     }
 }
 
 const mapState = (state) =>({
-    list: state.getIn(['home','articleList']),
+    writerId: state.getIn(['userHome','writerId']),
     articlePageCount: state.getIn(['home','articlePageCount']),
     articlePageNum: state.getIn(['home','articlePageNum']),
+    articleList: state.getIn(['userHome','articleList']),
+    pageSum: state.getIn(['userHome','pageSum']),
+    pageNum: state.getIn(['userHome','pageNum'])
 })
 
 const mapDispatch = (dispatch) =>({
-    getArticleList(){
-        dispatch(actionCreators.getArticleList(1));
+    getMoreArticleList(writerId,pageNum,pageSize){
+        dispatch(actionCreators.getArticleListWithArticleProfile(writerId,pageNum,pageSize));
     },
     getMoreList(pageNum,pageCount) {
         if(pageNum <= pageCount){
@@ -74,4 +83,4 @@ const mapDispatch = (dispatch) =>({
     }
 })
 
-export default connect(mapState,mapDispatch)(List);
+export default connect(mapState,mapDispatch)(ArticleList);

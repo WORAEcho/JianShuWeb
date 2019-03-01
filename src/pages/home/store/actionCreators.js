@@ -76,6 +76,7 @@ export const getWriters = (userId,writerPageNum) => {
     return (dispatch)=>{
         axios.get(URL+'writers?userId='+userId+'&unFollowed=true&pageNum=' + writerPageNum + '&pageSize=5').then((res) =>{
             const result=res.data;
+            console.log(result)
             // TODO：如果作者数为0，则会无限递归，不能这样写，后台应该要返回应该总页数
             if(result.length === 0 ){
                 dispatch(getWriters(userId,1)); 

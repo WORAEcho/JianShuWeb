@@ -137,3 +137,43 @@ export const ArticleFoot = styled.div`
         padding-right: 20px;
     }
 `;
+
+export const LikeButtonContainer = styled.div`
+    display: inline-block;
+    float: left;
+    padding: 15px 0 15px 0;
+    font-size: 19px;
+    border: 1px solid #EA6F5A;
+    border-radius: 40px;
+    cursor: pointer;
+    .like-btn, .likedNum-btn {
+        display: inline;
+        position: relative;
+        color: #EA6F5A;
+        .icon {
+            color: #EA6F5A;
+            padding: 0 0 0 28px;
+            margin: 0;
+        }
+        span {
+            padding: 18px 15px 18px 10px;
+        }
+        .likeNum {
+            padding: 18px;
+        }
+        .avtive{
+            color: white;
+        }
+    }
+    .likedNum-btn {
+        border-left: 1px solid rgba(236, 97, 73, 0.4);
+    }
+    .active {
+        border-left: 1px solid white;
+    }
+    &.active {
+        background-color: #EA6F5A;
+        color: white;
+    }
+
+`;

@@ -1,16 +1,17 @@
 import React, { PureComponent } from 'react';
-import { DetailWrapper,Header,Content,Author,AuthorBottom,Supprot,ArticleFoot } from './style'
+import { DetailWrapper,Header,Content,Author,AuthorBottom,Supprot,ArticleFoot } from './components/style'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from './store'
 import { Avatar } from '../all-writers/components/style';
-import FollowButton from '../all-writers/components/FollowButton.jsx'
-import moment from 'moment'
+import FollowButton from '../all-writers/components/FollowButton.jsx';
+import LikeButton from './components/LikeButton.jsx';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 class Detail extends PureComponent {
     render(){
-    const { articleDetail,writerSuvrey } =this.props;
+    const { articleDetail,writerSuvrey,likedList } =this.props;
         return (
             <DetailWrapper>
                 <Header>
@@ -26,7 +27,7 @@ class Detail extends PureComponent {
                     <span>字数 {articleDetail.word_count}</span>
                     <span>阅读 999</span>
                     <span>评论 99</span>
-                    <span>喜欢 9</span>
+                    <span>喜欢 {likedList.length}</span>
                     </div>
                     </div>
                 </Author>
@@ -55,21 +56,14 @@ class Detail extends PureComponent {
                     <div>
                     <span>写了 {writerSuvrey.totalWordCount} 字, </span>
                     <span>被 {writerSuvrey.fansNum} 人关注, </span>
-                    <span>获得了 999 个喜欢</span>
+                    <span>获得了 {writerSuvrey.totalLikeCount} 个喜欢</span>
                     </div>
                     </div>
                     <FollowButton className='follow-button' id='follow-button' writerId={articleDetail.userId}>关注</FollowButton>
                 </AuthorBottom>
                 <div>
-                    <div>
-                        <div>
-                            爱心
-                        </div>
-                        <div>
-                            11
-                        </div>
-                    </div>
-                    <div>
+                <LikeButton articleId={this.props.match.params.id}></LikeButton>
+                    <div style={{float: 'right'}}>
                         分享
                     </div>
                 </div>
@@ -84,6 +78,8 @@ class Detail extends PureComponent {
 const mapState = (state) => ({
     articleDetail: state.getIn(['detail', 'articleDetail']),
     writerSuvrey: state.getIn(['detail', 'writerSurvey']),
+    likedList: state.getIn(['detail','likedList']),
+
 });
 
 const mapDispatch = (dispatch) =>({

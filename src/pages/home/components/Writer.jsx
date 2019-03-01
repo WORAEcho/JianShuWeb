@@ -13,6 +13,7 @@ class Writer extends PureComponent {
     state=({
         unfollowState: false
     })
+
     render(){
         const {handleChangePage,writerPageNum,writerList,userId,followedWriterList} =this.props;
             return (
@@ -31,8 +32,8 @@ class Writer extends PureComponent {
                         </SearchInfoTitle>
                     </CSSTransition>
                     {
-                        writerList.map(item=>{
-                            const writerId = item.get('id');
+                        writerList.map((item)=>{
+                            const writerId = item.get('writerId');
                             const unFollowed = followedWriterList.indexOf(writerId) === -1;
                             return (
                                 <WriterItem key={writerId}>
@@ -51,13 +52,14 @@ class Writer extends PureComponent {
                                             {unFollowed ? '关注' : this.state.unfollowState ? '取消关注' : '已关注'}
                                         </span>
                                         </FollowButtom>
-                                        <Link to={'userHome/'+writerId}><span className='writer_name'>{item.get('username')}</span></Link>
-                                        <span className='writer_desc'>写了1523.3k字 · 30.8k喜欢</span>
+                                        <Link to={'userHome/'+writerId}><span className='writer_name'>{item.get('nickname')}</span></Link>
+                                        <span className='writer_desc'>写了{item.get('wordCount')}字 · {item.get('likeNum')}喜欢</span>
                                     </WriterInfo>
                                 </WriterItem>
-                                )
+                            )
                         })
                     }
+                    
                     <Link to={'all-writers'}><LoadAll>查看全部</LoadAll></Link>
                 </WritterWrapper>
             )            
@@ -117,4 +119,5 @@ const mapDispatch = (dispatch) =>({
         dispatch(actionCreators.unfollow(userId,followUserId))
     }
 })
+
 export default connect(mapState,mapDispatch)(withRouter(Writer));

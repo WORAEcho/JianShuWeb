@@ -17,7 +17,7 @@ class FollowButton extends PureComponent {
                         onClick={()=>this.changeFollow(userId,writerId,unFollowed)}
                         onMouseEnter={() => this.toggelUnfollowState(unFollowed,true)}
                         onMouseLeave={()=> this.toggelUnfollowState(unFollowed,false)}>
-                <svg className={unFollowed ? 'icon unfollowed' : 'icon followed'} aria-hidden="true">
+                <svg className={unFollowed ? 'icon unfollowed' : 'icon followed'} aria-hidden="true" style={{margin: '0 5px 0 0'}}>
                     <use xlinkHref={unFollowed ? '#icon-jiahao-copy' : this.state.unfollowState ? '#icon-cha' : '#icon-gou'}></use>
                 </svg>
                 {unFollowed ? '关注' : this.state.unfollowState ? '取消关注' : '已关注'}
