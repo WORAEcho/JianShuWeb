@@ -39,32 +39,15 @@ class UserSetting extends PureComponent {
     }
     componentDidMount(){
         this.props.changeHomeData();
-        this.bandEvents();
-    }
-
-    componentWillUnmount(){
-        window.removeEventListener('scroll',this.props.changeScrollTopShow)
-    }
-
-    bandEvents(){
-        window.addEventListener('scroll',this.props.changeScrollTopShow)
     }
 }
 
 const mapState = (state) => ({
-    showScroll: state.getIn(['home', 'showScroll'])
 })
 
 const mapDispatch= (dispatch) => ({
     changeHomeData(){
         dispatch(actionCreators.getHomeInfo());
-    },
-    changeScrollTopShow(){
-        if(document.documentElement.scrollTop > 400) {
-            dispatch(actionCreators.toggleTopShow(true));
-        }else{
-            dispatch(actionCreators.toggleTopShow(false));
-        }
     }
 })
 export default connect(mapState,mapDispatch)(UserSetting);

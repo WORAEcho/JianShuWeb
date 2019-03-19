@@ -80,6 +80,9 @@ export const SearchWrapper= styled.div`
             color: #fff;
         }
     }
+    .search-history-title{
+        display: none;
+    }
 `;
 
 export const NavSearch =styled.input.attrs({
@@ -125,10 +128,15 @@ export const SearchInfo = styled.div`
     position: absolute;
     left: 20px;
     top: 56px;
-    width: 240px;
+    width: 220px;
     padding: 0 20px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .2);
     background: #fff;
+    border-radius: 4px;
+    .search-history-wrapper {
+        padding-top: 5px;
+        border-top: 1px solid #f0f0f0;
+    }
 `;
 
 export const SearchInfoTitle = styled.div`
@@ -158,9 +166,51 @@ export const SearchInfoSwitch = styled.span`
 
 export const SearchInfoList =styled.div`
     overflow: hidden;
+    &.search-history {
+        margin: 0 -15px;
+        &:last-child {
+            margin-bottom: 5px;
+        }
+    }
 `;
 
-export const SearchInfoItem = styled.a`
+export const SearchHistoryList =styled.div`
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    height: 40px;
+    line-height: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    &:hover {
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        .hidden {
+            display: block;
+        }
+    }
+    .icon {
+        float: left;
+        margin: 0 10px 0 0;
+        font-size: 18px;
+        color: #787878;
+    }
+    .hidden {
+        display: none;
+        float: right;
+        color: #a0a0a0;
+        margin: 0;
+        &:hover {
+            color: #2f2f2f;
+        }
+    }
+`;
+
+export const SearchInfoItem = styled.div`
     display:block;
     float: left;
     line-height: 20px;
@@ -222,4 +272,5 @@ export const Avatar =styled.img`
     line-height:38px;
     margin-top: 9px;
     margin-right: 10px;
+    cursor: pointer;
 `;

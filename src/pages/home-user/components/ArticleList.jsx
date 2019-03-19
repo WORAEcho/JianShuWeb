@@ -7,7 +7,7 @@ import moment from 'moment';
 
 class ArticleList extends PureComponent {
     render(){
-        const { getMoreList,articlePageCount,articlePageNum,articleList,pageSum,pageNum,writerId } =this.props;
+        const { articleList,pageSum,pageNum,writerId } =this.props;
         return (
             <div>
                 {

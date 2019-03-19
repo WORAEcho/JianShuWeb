@@ -1,0 +1,31 @@
+#search-listInfo{
+    width: 625px;
+}
+
+#search-articlelist-avatar{
+    margin: 0 10px 0 0;
+    width: 22px;
+    height: 22px;
+}
+
+#search-articlelist-username{
+    color: #333;
+    height: 22px;
+    line-height: 22px;
+    vertical-align: top;
+}
+
+#search-article-time{
+    line-height: 22px;
+    vertical-align: top;
+
+}
+
+#search-author{
+    height: 22px;
+    margin: 0 0 5px 0;
+}
+
+#search-title:hover{
+    text-decoration: underline;
+}

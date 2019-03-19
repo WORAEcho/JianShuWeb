@@ -9,7 +9,7 @@ import Register from './pages/login/register.jsx';
 import UserHome from './pages/home-user/index';
 import UserSetting from './pages/setting-user/index';
 import AllWriters from './pages/all-writers/index';
-
+import Search from './pages/search/index';
 import Write from './pages/write';
 import store from './store';
 
@@ -28,6 +28,7 @@ class App extends Component {
             <Route path='/userhome/:id' exact component={UserHome}></Route>
             <Route path='/usersetting' exact component={UserSetting}></Route>
             <Route path='/all-writers' exact component={AllWriters}></Route>
+            <Route path='/search' exact component={Search}></Route>
             
           </div>
         </BrowserRouter>

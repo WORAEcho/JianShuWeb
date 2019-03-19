@@ -3,7 +3,6 @@ import { LikeButtonContainer} from './style'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store'
-import { Link } from 'react-router-dom';
 
 class LikeButton extends PureComponent {
     render(){

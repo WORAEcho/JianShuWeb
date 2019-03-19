@@ -35,17 +35,6 @@ class AllWriters extends PureComponent {
 
 
 const mapState = (state) => ({
-    // userId: state.getIn(['login','userId']),
-    // username: state.getIn(['login','user']),
-    // followedNum: state.getIn(['userHome','followedNum']),
-    // fansNum: state.getIn(['userHome','fansNum']),
-    // nickname: state.getIn(['userHome','nickname']),
-    // gender: state.getIn(['userHome','gender']),
-    // profile: state.getIn(['userHome','profile']),
-    // website: state.getIn(['userHome','website']),
-    // email: state.getIn(['userHome','email']),
-    // qdcodeImg: state.getIn(['userHome','qdcodeImg']),
-    // avatarImg: state.getIn(['userHome','avatarImg']),
     writerListWithProfile: state.getIn(['allWriter','writerListWithProfile']),
 
 })

@@ -7,6 +7,8 @@ import { reducer as writeReducer } from '../pages/write/store';
 import { reducer as userHomeReducer } from '../pages/home-user/store';
 import { reducer as userSettingReducer } from '../pages/setting-user/store';
 import { reducer as allWriterReducer } from '../pages/all-writers/store';
+import { reducer as searchReducer } from '../pages/search/store';
+
 const reducer = combineReducers({
     header: headerReducer,
     home: homeReducer,
@@ -15,7 +17,8 @@ const reducer = combineReducers({
     write: writeReducer,
     userHome: userHomeReducer,
     userSetting: userSettingReducer,
-    allWriter: allWriterReducer
+    allWriter: allWriterReducer,
+    search: searchReducer
 });
 
 export default reducer;

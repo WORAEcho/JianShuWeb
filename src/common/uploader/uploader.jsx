@@ -58,6 +58,7 @@ class Uploader extends Component {
             }
         });
         return uploader
+
     }
 
 

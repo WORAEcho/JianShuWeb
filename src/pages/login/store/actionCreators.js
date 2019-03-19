@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as constants from './constants';
 import { fromJS } from 'immutable';
 import { actionCreators as homeActionCreator } from '../../home/store';
+// import { setCookie } from '../../../common/function/commonFunction';
 
 const URL = "http://localhost:8080/";
 
@@ -57,14 +58,20 @@ export const login = (account, password,checked) => {
         axios.post(URL+'login',{
             username: account,
             password: password,
-            // checked: checked
+            checked: checked
         }).then((res) => {
-            switch(res.data){
-                case 1: dispatch(getUserInfo(account));break;
-                case 2: alert('用户名不存在，请先注册。');break;
-                case 3: alert('密码错误，请重试。');break;
-                default: alert('登录失败');
+            if(res.data.code === 200){
+                localStorage.setItem('token', res.data.token)
+                dispatch(getUserInfo(account));
+            }else{
+                alert('登陆失败！')
             }
+            // switch(res.data){
+            //     case 1: dispatch(getUserInfo(account));break;
+            //     case 2: alert('用户名不存在，请先注册。');break;
+            //     case 3: alert('密码错误，请重试。');break;
+            //     default: alert('登录失败');
+            // }
         }).catch(()=>{
             console.log('登录失败')
         });

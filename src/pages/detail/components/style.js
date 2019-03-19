@@ -177,3 +177,265 @@ export const LikeButtonContainer = styled.div`
     }
 
 `;
+
+export const CommentContainer = styled.div`
+    .comment-submit {
+        margin: 100px 0 0 50px;
+    }
+    textarea {
+        padding: 10px 15px;
+        margin: 0;
+        width: 100%;
+        height: 80px;
+        font-size: 13px;
+        border: 1px solid #dcdcdc;
+        border-radius: 4px;
+        background-color: hsla(0,0%,71%,.1);
+        resize: none;
+        display: inline-block;
+        vertical-align: top;
+        outline-style: none;
+        overflow: auto;
+        box-sizing: border-box;
+        font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    }
+    .comment-function-block{
+        box-sizing: border-box;
+        height: 50px;
+        font-size: 13px;
+        color: #969696;
+        div {
+            display: inline-block;
+            margin: 20px 20px;
+        }
+        .icon {
+            display: inline-block;
+            font-size: 25px;
+            margin: 0;
+        }
+        .send-button {
+            box-sizing: border-box;
+            font-weight: 400;
+            text-align: center; 
+            float: right;
+            width: 78px;
+            height: 40px;
+            padding: 5px 18px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+        .cancel-button {
+            box-sizing: border-box;
+            float: right;
+            margin: 18px 25px 0 0;
+            font-size: 16px;
+            color: #969696;
+            cursor: pointer;
+        }
+    }
+`;
+
+export const CommentListContainer = styled.div`
+    border-top: 1px solid #f0f0f0;
+    padding: 20px 0 10px 0;
+    img {
+        margin: 0 10px 0 0;
+    }
+    .nick {
+        font-size: 15px;
+        color: #333;
+        cursor: pointer;
+        &.reply {
+            color: #3194d0;
+            font-size: 14px;
+        }
+    }
+    .desc {
+        display: block;
+        font-size: 12px;
+        color: #969696;
+        &.reply {
+            float:right;
+            margin: 0 10px 0 0;
+            display: inline-block;
+        }
+    }
+    .icon {
+        font-size: 18px;
+        margin: 0 5px 0 0;
+        color: #969696;
+        cursor: pointer;
+        &.reply {
+            float:right;
+            font-size: 14px;
+            margin: 0 2px 0 0;
+        }
+    }
+    .content {
+        font-size:  16px;
+        margin: 10px 0 15px 0;
+        &.reply {
+            font-size: 14px;
+        }
+    }
+    .like,.replyy {
+        font-size:  14px;
+        color: #969696;
+        cursor: pointer;
+        &.reply {
+            margin: 0 10px 0 0;
+            float:right;
+            font-size: 12px;
+        }
+    }
+
+    .replyy {
+        &.reply {
+            margin: 0;
+        }
+    }
+
+    .report {
+        display: none;
+        color: #969696;
+        font-size: 14px;
+        float: right;
+        cursor: pointer;
+        &.reply {
+            margin: 0 10px 0 0;
+            font-size: 12px;
+        }
+        &:hover {
+            color: #333;
+        }
+    }
+    .comment-submit {
+        margin: 0;
+        padding: 10px 0 10px 20px;
+        border-left: 2px solid #d9d9d9;
+        cursor: pointer;
+    }
+    &:hover {
+        .show {
+            display: inline-block;
+        }
+    }
+    .func-block {
+        margin: 0 25px 0 0;
+        overflow: hidden;
+        display: inline-block;
+        box-sizing: border-box;
+        :hover {
+            .icon {
+                color: #ea6f5a;
+            }
+            span {
+                color: #333;
+            }
+        }
+        &.reply {
+            float: right;
+            margin: 0;
+        }
+    }
+`;
+
+export const ReplyListContainer = styled.div`
+    border-top: 1px solid #f0f0f0;
+    padding: 20px 0 10px 0;
+    img {
+        margin: 0 10px 0 0;
+    }
+    .nick {
+        font-size: 15px;
+        color: #333;
+        cursor: pointer;
+        &.reply {
+            color: #3194d0;
+            font-size: 14px;
+        }
+    }
+    .desc {
+        display: block;
+        font-size: 12px;
+        color: #969696;
+        &.reply {
+            float:right;
+            margin: 0 10px 0 0;
+            display: inline-block;
+        }
+    }
+    .icon {
+        font-size: 18px;
+        margin: 0 5px 0 0;
+        color: #969696;
+        &.reply {
+            float:right;
+            font-size: 14px;
+            margin: 0 2px 0 0;
+        }
+    }
+    .content {
+        font-size:  16px;
+        margin: 10px 0 15px 0;
+        &.reply {
+            font-size: 14px;
+        }
+    }
+    .like,.replyy {
+        font-size:  14px;
+        margin: 0 25px 0 0;
+        color: #969696;
+        cursor: pointer;
+        &.reply {
+            margin: 0 10px 0 0;
+            float:right;
+            font-size: 12px;
+        }
+    }
+
+    .replyy {
+        &.reply {
+            margin: 0;
+        }
+    }
+
+    .report {
+        display: none;
+        color: #969696;
+        font-size: 14px;
+        float: right;
+        cursor: pointer;
+        &.reply {
+            margin: 0 10px 0 0;
+            font-size: 12px;
+        }
+    }
+    .comment-submit {
+        margin: 0;
+        padding: 10px 0 10px 20px;
+        border-left: 2px solid #d9d9d9;
+        cursor: pointer;
+    }
+    &:hover {
+        .showw {
+            display: inline-block;
+        }
+    }
+`;
+
+
+
+export const MoreReply = styled.div`
+    padding: 10px 0 15px 15px;
+    font-size: 14px;
+    color: #969696;
+    span {
+        margin: 0 10px 0 0;
+        color: #3194d0;
+        cursor: pointer;
+    }
+`;

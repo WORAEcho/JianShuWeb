@@ -1,0 +1,43 @@
+#search-userlist-listInfo{
+    width: 625px;
+    height: 70px;
+}
+
+#search-userlist-avatar{
+    margin: 0 10px 0 0;
+    padding: 10px 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+#search-userlist-info{
+    height: 70px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#search-userlist-username{
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+}
+
+.search-userlist-meta{
+    margin-right: 10px;
+    padding-right: 10px;
+    font-size: 12px;
+    border-right: 1px solid #969696;
+    color: #969696;
+}
+
+.search-userlist-meta:last-child{
+    border: none;
+}
+
+#search-userlist-followbutton{
+    display: inline-block;
+    height: 20px;
+    width: 90px;
+}

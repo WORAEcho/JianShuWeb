@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { actionCreators }  from './store';
-// import { actionCreators as loginActionCreators } from '../../pages/login/store';
 import { Link } from 'react-router-dom';
 import {
     HeaderWrapper,
@@ -19,18 +18,14 @@ import {
     Addition,
     Button,
     Avatar
-} from './style'
+} from './style';
+import SearchHistory from './components/SearchHistory.jsx';
 
-
-// const Header = (props) => {
-//     return (
-//     )
-// }
 
 class Header extends Component {
     
     state = {
-        showMenu: false
+        showMenu: false,
       }
 
     getListArea(){
@@ -40,10 +35,13 @@ class Header extends Component {
         if(jsList.length){
             for (let i = (page-1) * 10; i < page * 10; i++) {
                 pageList.push(
-                    <SearchInfoItem key={jsList[i]}>{jsList[i]}</SearchInfoItem>
+                    <Link key={jsList[i]} target="_blank" to={'search?fuzzyKey='+jsList[i]+'&pageNum=1'}>
+                    <SearchInfoItem>{jsList[i]}</SearchInfoItem>
+                    </Link>
                 )
             }
         }
+
         if(focused || mouseIn){
             return (
             <SearchInfo 
@@ -57,10 +55,11 @@ class Header extends Component {
                         换一批
                     </SearchInfoSwitch>
                 </SearchInfoTitle>
-                <SearchInfoList>
+                <SearchInfoList className='hot-search'>
                     {pageList}
                 </SearchInfoList>
-        </SearchInfo>
+                <SearchHistory></SearchHistory>
+            </SearchInfo>
             )
         }else{
             return null;
@@ -104,12 +103,23 @@ class Header extends Component {
                             className={focused ? 'focused': ''}
                             onFocus={() => handleInputFocus(list)}
                             onBlur={handleInputBlur}
+                            ref={(input)=>{this.fuzzyKey = input}}
                         >
                         </NavSearch>
                         </CSSTransition>
-                        <span className={focused ? 'focused iconfont zoom': 'iconfont zoom'}>
-                            &#xe62b;
-                        </span>
+                        {
+                            this.fuzzyKey === undefined || this.fuzzyKey.value === '' ?
+                            <span className={focused ? 'focused iconfont zoom': 'iconfont zoom'}>
+                                &#xe62b;
+                            </span> :
+                            <Link target="_blank" 
+                                  to={'search?fuzzyKey='+this.fuzzyKey.value+'&pageNum=1'} 
+                            >
+                            <span className={focused ? 'focused iconfont zoom': 'iconfont zoom'}>
+                                &#xe62b;
+                            </span>
+                            </Link>
+                        }
                     {this.getListArea()}    
                     </SearchWrapper>
                 </Nav>
@@ -132,7 +142,7 @@ class Header extends Component {
                         </svg>
                         </NavItem>
                         :
-                        <Button className='reg'>注册</Button>   
+                        <Link to='/register'><Button className='reg'>注册</Button></Link>
                     }
                 </Addition>
                 {
@@ -179,6 +189,9 @@ class Header extends Component {
             </HeaderWrapper>
         )
     }
+    componentWillMount(){
+        this.props.checkLogin();
+    }
 
     //TODO 这方法太不优雅了... 
     logOutWithtoggleMenu(){
@@ -194,15 +207,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        // focused: state.header.focused
-        // focused: state.header.get('focused')
         focused: state.getIn(['header', 'focused']),
         list: state.getIn(['header','list']),
         page: state.getIn(['header','page']),
         totalPage: state.getIn(['header','totalPage']),
         mouseIn: state.getIn(['header','mouseIn']),
         login: state.getIn(['login','login']),
-        // focused: state.get('header').get('focused')
         avatarImg: state.getIn(['login','avatarImg']),
         userId: state.getIn(['login','userId'])
     }
@@ -237,11 +247,13 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actionCreators.changePage(1));
             }
         },
+        checkLogin(){
+            dispatch(actionCreators.checkLogin());
+        },
         logout(){
+            localStorage.removeItem('token');
             window.location.reload()
-            // dispatch(loginActionCreators.logout())
         }
-
     }
 }
 

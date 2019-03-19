@@ -16,11 +16,7 @@ const defaultState = fromJS({
 
 const changePublishedArticleList=(state,action)=>{
     if(action.operation === 'add'){
-        console.log(state)
-        console.log(action)
         return state.set('publishedArticleList',state.get('publishedArticleList').push(action.articleId));
-    }else{
-        console.log('reduce')
     }
 }
 
