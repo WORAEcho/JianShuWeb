@@ -39,11 +39,17 @@ const addReplyMap = (commentId,result) => ({
     result
 })
 
+const changeMainComment = (parentId) => ({
+    type: constants.CHANGE_MAIN_COMMENT,
+    parentId
+})
+
 export const getDetail = (articleId) => {
     return (dispatch) =>{
         axios.get(URL+'article/'+articleId+'/published/profile').then((res)=>{
             const result=res.data;
             dispatch(changeDetail(result));
+            console.log(res)
             axios.get(URL+'writer/'+result.userId+'/survey').then((res)=>{
                 const survey=res.data;
                 dispatch(setWriterSurvey(survey));
@@ -117,7 +123,7 @@ export const submitComment = (articleId,userId,content) => {
     }
 }
 
-export const submitReply = (parentId,articleId,userId,content,quotedUserId) => {
+export const submitReply = (commentId,parentId,articleId,userId,content,quotedUserId) => {
     return (dispatch) =>{
         axios.post(URL+'article/comment',{
             'parentId':parentId,
@@ -127,9 +133,9 @@ export const submitReply = (parentId,articleId,userId,content,quotedUserId) => {
             'mainComment':0,
             'quotedUserId':quotedUserId
         }).then((res)=>{
-            const result=res.data;
-            if(result === 1){
-                dispatch(getReply(articleId,parentId))
+            if(res.data === 1){
+                dispatch(getReply(articleId,commentId,userId))
+                dispatch(changeMainComment(parentId))
             }
         }).catch(()=>{
             alert('添加回复失败')
@@ -148,20 +154,25 @@ export const getMainComment = (pageNum,articleId,userId) => {
     }
 }
 
-export const getReply = (articleId,parentId) => {
+export const getReply = (articleId,parentId,userId) => {
+    const getReplyURL = URL+'article/reply?pageNum=1&articleId='+articleId+'&parentId='+parentId
     return (dispatch) =>{
-        axios.get(URL+'article/reply?pageNum=1&articleId='+articleId+'&parentId='+parentId).then((res)=>{
+        axios.get(userId === '' ? getReplyURL : getReplyURL+'&userId='+userId).then((res)=>{
             const result=res.data;
-            dispatch(setReplyMap(parentId,fromJS(result.list),result.pages))
+            if(result.total > 0){
+                dispatch(setReplyMap(parentId,fromJS(result.list),result.pages))
+            }
         }).catch(()=>{
             alert('请求回复失败')
         })       
     }
 }
 
-export const moreReply = (pageNum,articleId,parentId) => {
+export const moreReply = (pageNum,articleId,parentId,userId) => {
+    const moreReplyURL = URL+'article/reply?pageNum='+pageNum+'&articleId='+articleId+'&parentId='+parentId
+
     return (dispatch) =>{
-        axios.get(URL+'article/reply?pageNum='+pageNum+'&articleId='+articleId+'&parentId='+parentId).then((res)=>{
+        axios.get(userId === '' ? moreReplyURL : moreReplyURL+'&userId='+userId).then((res)=>{
             const result=res.data;
             dispatch(addReplyMap(parentId,fromJS(result.list)))
         }).catch(()=>{
@@ -170,17 +181,62 @@ export const moreReply = (pageNum,articleId,parentId) => {
     }
 }
 
-export const addLikeComment = (userId,commentId) => {
+//toggleLikeComment被comment调用时，参数为commentId;被reply调用时，参数为replyId(原commentId),commentId(parentId)
+export const addLikeComment = (userId,commentId,isReply,parentId) => {
     return (dispatch) =>{
         axios.post(URL+'article/comment/like',{
             'userId':userId,
             'commentId':commentId
         }).then((res)=>{
             const result=res.data;
-            console.log(result)
-        }).catch(()=>{
+            result !== 0 ?
+            dispatch(isReply ? addLikeReplyAction(userId,commentId,result,parentId) : addLikeCommentAction(userId,commentId,result)) :
+            alert('喜欢评论失败')
+        }).catch((e)=>{
+            console.log(e)
             alert('喜欢评论失败')
         })       
     }
 }
 
+
+export const deleteLikeComment = (userId,commentId,likedId,isReply,parentId) => {
+    return (dispatch) =>{
+        axios.delete(URL+'article/comment/like?likedId='+likedId).then((res)=>{
+            res.data !== 0 ?
+            dispatch(isReply ? deleteLikeReplyAction(userId,commentId,parentId) : deleteLikeCommentAction(userId,commentId)) :
+            alert('删除评论失败')
+        }).catch((e)=>{
+            console.log(e)
+            alert('删除评论失败')
+        })       
+    }
+}
+
+const addLikeCommentAction = (userId,commentId,likedId) => ({
+    type: constants.ADD_LIKE_COMMENT,
+    userId,
+    commentId,
+    likedId
+})
+
+const deleteLikeCommentAction = (userId,commentId) => ({
+    type: constants.DELETE_LIKE_COMMENT,
+    userId,
+    commentId
+})
+
+const addLikeReplyAction = (userId,commentId,likedId,parentId) => ({
+    type: constants.ADD_LIKE_REPLY,
+    userId,
+    commentId,
+    likedId,
+    parentId
+})
+
+const deleteLikeReplyAction = (userId,commentId,parentId) => ({
+    type: constants.DELETE_LIKE_REPLY,
+    userId,
+    commentId,
+    parentId
+})

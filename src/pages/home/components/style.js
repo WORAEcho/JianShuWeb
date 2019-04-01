@@ -52,11 +52,14 @@ export const TopicItem = styled.div`
 
 export const ListItem = styled.div`
     overflow: hidden;
+    position: relative;
     border-bottom: 1px solid #f0f0f0;
     .list-pic {
-        margin-top: 12.5px;
+        position: absolute;
+        top: 20%;
+        right: 0;
         display: block;
-        width 125px;
+        width 150px;
         height: 100px;
         float: right;
         border-radius: 10px;
@@ -69,7 +72,7 @@ export const ListItem = styled.div`
 `;
 
 export const ListInfo = styled.div`
-    width: 500px;
+    width: 450px;
     float: left;
     margin: 20px 0;
     .title {

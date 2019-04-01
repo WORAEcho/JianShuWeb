@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 import { CommentListContainer,MoreReply } from './style'
-import { withRouter } from 'react-router-dom';
+import { withRouter,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
 import { Avatar } from '../../../common/header/style';
@@ -17,19 +17,23 @@ class Comment extends PureComponent {
     })
 
     render(){
-        const { userId,replyMap,commentItem,articleId,replyNextPageNumMap,replyTotalPageMap } =this.props;
+        const { userId,replyMap,commentItem,articleId,replyNextPageNumMap,replyTotalPageMap,toggleLikeComment } =this.props;
         const parentId = commentItem.get('id');
         const replylist = replyMap.get(parentId);
         return (
             <CommentListContainer>
                 <div style={{margin:'0 0 15px 0'}}>
-                <Avatar src={commentItem.get('avatar_img')}></Avatar>
-                <span className='nick'>{commentItem.get('nickname')}</span>
+                <Link target="_blank"  to={'/userhome/'+commentItem.get('user_id')} style={{textDecoration: 'none'}}>
+                    <Avatar src={commentItem.get('avatar_img')}></Avatar>
+                    <span className='nick'>{commentItem.get('nickname')}</span>
+                </Link>
                 <span className='desc'>{dateDiff(commentItem.get('create_time'))}</span>
                 </div>
                 <div className='content'>{commentItem.get('content')}</div>
                 <div style={{padding: '0 0 10px 0'}}>
-                    <div className='func-block' onClick={()=>this.props.addLikeComment(userId,parentId)}>
+                    <div className={commentItem.get('liked') === 1 ? 'func-block active' : 'func-block'} 
+                         onClick={()=>toggleLikeComment(userId,parentId,commentItem.get('liked'),commentItem.get('likedId'))}
+                    >
                         <svg className='icon' aria-hidden="true">     
                             <use xlinkHref='#icon-z-like'></use>
                         </svg>
@@ -72,8 +76,9 @@ class Comment extends PureComponent {
                             replylist.map((item,index)=>{
                                 return (
                                     <Reply key={item.get('id')} 
-                                        replyItem={item}
-                                        last={replylist.size === index + 1 ? true : false}
+                                           commentId={parentId}
+                                           replyItem={item}
+                                           last={replylist.size === index + 1 ? true : false}
                                     ></Reply>
                                 )
                             })
@@ -84,8 +89,7 @@ class Comment extends PureComponent {
                                 {
                                     replyNextPageNumMap.get(parentId)-1 < 2 ? null :
                                     <span onClick={()=>this.toggleReply(false)}>收起回复</span>
-                                }
-                                
+                                }                               
                             </MoreReply> 
                             :
                             <MoreReply>
@@ -106,7 +110,8 @@ class Comment extends PureComponent {
                 }
                 {
                     this.state.showSubmit ? 
-                    <CommentSubmit 
+                    <CommentSubmit
+                        commentId={parentId}
                         toggleSubmit={this.toggleSubmit.bind(this)} 
                         commentType={0}
                         parentId={parentId}
@@ -120,6 +125,7 @@ class Comment extends PureComponent {
     }
 
     componentDidMount(){
+        console.log('componentDidMount')
         const { myType } = this.props;
         if(myType !== undefined){
             this.replyInit(myType);
@@ -133,11 +139,12 @@ class Comment extends PureComponent {
     }
 
     showReply(articleId,parentId){
-        this.props.getReplyMap(articleId,parentId)
+        this.props.getReplyMap(articleId,parentId,this.props.userId)
         this.toggleReply(true)
     }
 
     toggleReply(state){
+        console.log('toggleReply'+state)
         this.setState({
             reply: state
         })
@@ -151,7 +158,7 @@ class Comment extends PureComponent {
 
     moreReply(articleId,parentId){
         const pageNum = this.props.replyNextPageNumMap.get(parentId)
-        this.props.moreReply(pageNum,articleId,parentId)
+        this.props.moreReply(pageNum,articleId,parentId,this.props.userId)
     }
 }
 const mapState = (state) => ({
@@ -163,15 +170,20 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) =>({
-    getReplyMap(articleId,parentId){
-        dispatch(actionCreators.getReply(articleId,parentId))
+    getReplyMap(articleId,parentId,userId){
+        dispatch(actionCreators.getReply(articleId,parentId,userId))
     },
-    moreReply(pageNum,articleId,parentId){
-        dispatch(actionCreators.moreReply(pageNum,articleId,parentId))
+    moreReply(pageNum,articleId,parentId,userId){
+        dispatch(actionCreators.moreReply(pageNum,articleId,parentId,userId))
     },
-    addLikeComment(userId,commentId){
+    //toggleLikeComment被comment调用时，参数为commentId;被reply调用时，参数为replyId(原commentId),commentId(parentId)
+    toggleLikeComment(userId,commentId,liked,likedId){
         if(userId !== ''){
-            dispatch(actionCreators.addLikeComment(userId,commentId))
+            if(liked === 1){
+                dispatch(actionCreators.deleteLikeComment(userId,commentId,likedId))
+            }else{
+                dispatch(actionCreators.addLikeComment(userId,commentId))    
+            }
         }else{
             this.history.push('/login');
         }

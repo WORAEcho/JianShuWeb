@@ -6,77 +6,69 @@ import axios from 'axios';
 class Uploader extends Component {
 
     state = {
-        filePhoto: uploadDefaultPhoto
+        filePhoto: uploadDefaultPhoto,
+        filename: ''
     }
 
     render() {
     return (
-        // <div>
-        //     <div style={{border: '1px solid red'}}>
-        //         <img style={{width: '200px',height: '200px'}} src={this.state.filePhoto} />
-        //     </div>
-            <div id="user-photo">{this.props.myValue}</div>
-        // </div>
+        <div id="user-photo">{this.props.myValue}</div>
     )
     }
 
     initSinglePlupload = () => {
-        var uploader = new plupload.Uploader({ //创建一个plupload
-            runtimes : 'html5, flash',
-            browse_button: 'user-photo',       // 上传按钮 引发上传事件的按钮的id
-            url: "http://up-z2.qiniup.com/",   //远程上传地址 后台地址(七牛)
+        var uploader = new plupload.Uploader({
+            runtimes : 'html5,flash',
+            browse_button : 'user-photo', 
+            multi_selection: false,
+            url : 'http://jianshu-pic.oss-cn-qingdao.aliyuncs.com',
             filters : {
-            max_file_size : '10mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
-            mime_types: [
-                {title : "JPG/PNG文件", extensions : "jpg,jpeg,JPG,JPEG,png,PNG,gif,GIF"}
-            ]
-            },
-            multi_selection: false,   //true多文件上传, false 单文件上传
-            multipart_params : {
-            key: '',
-            token: ''
-            },
-            multipart: true, //为true时将以multipart/form-data的形式来上传文件
-            resize: {
-            width: 1600,
-            height: 1600
+                max_file_size : '10mb',
+                mime_types: [
+                    {title : "JPG/PNG文件", extensions : "jpg,jpeg,JPG,JPEG,png,PNG,gif,GIF"}
+                ]
             },
             init: {
-                // FilesAdded  文件上传前触发
-                FileUploaded: function (up, file, result) { //文件上传成功的时候触发
-                    this.setState({
-                        filePhoto: 'http://pmwmye8w0.bkt.clouddn.com/'+JSON.parse(result.response).key
-                    })
-                    //给父组件传图片链接
-                    this.props.handlePhotoUrl(this.state.filePhoto);
+                FileUploaded: function(up, file, info) {
+                    if (info.status === 200)
+                    {
+                        this.setState({
+                            filePhoto: 'http://jianshu-pic.oss-cn-qingdao.aliyuncs.com/images/'+this.state.filename
+                        })
+                        this.props.handlePhotoUrl(this.state.filePhoto); //给父组件传图片链接
+                    }
                 }.bind(this),
-                Error: function (up, err) { 
-                    //上传出错的时候触发
-                    console.log(up);
-                    console.log(err);
+                Error: function(up, err) {
+                    console.log(err)
                 }
             }
         });
-        return uploader
-
+        return uploader;
     }
 
 
     componentDidMount() {
         var uploader = this.initSinglePlupload('');
         uploader.bind('FilesAdded',function(uploader, file) {
-            axios.get('http://localhost:8080/getUploadToken',{
-            }).then((res)=>{
-                uploader.setOption('multipart_params', {
-                    key: res.data.key,
-                    token: res.data.token
+            axios.get('http://localhost:8080/getUploadToken').then((res)=>{
+                const ret = res.data;
+                const filename = 'images/'+file[0].name.split('.')[0]+(new Date()).getTime();
+                this.setState({'filename':filename.split('/')[1]})
+                const new_multipart_params = {
+                    'key' : filename,
+                    'policy': ret.policy,
+                    'OSSAccessKeyId': ret.accessid, 
+                    'success_action_status' : '200',
+                    'signature': ret.signature,
+                };
+                uploader.setOption({
+                    'multipart_params': new_multipart_params
                 });
-                uploader.start();
+                uploader.start();    
             }).catch((e)=>{
                 console.log(e);
             })
-        }
-        )
+        }.bind(this))
         uploader.init();
     }
 }

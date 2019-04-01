@@ -10,7 +10,7 @@ class ArticleList extends PureComponent {
       }
 
     render() {
-        const { articleList,collectionId,articleId,title,myEditor,publishedArticleList } =this.props;
+        const { articleList,collectionId,articleId,title,myEditor,publishedArticleList,disPublishArticle } =this.props;
       return (
         <ListContainer className='article'>
             <NewArticle onClick={()=>this.newArticle(collectionId)}>            
@@ -54,13 +54,22 @@ class ArticleList extends PureComponent {
                                         onMouseOver={()=>this.toggleMenu(true)}
                                         onMouseLeave={()=>this.toggleMenu(false)}
                                     >
-                                        
-                                    <li onClick={()=>this.publishArticle(id)}><span>
-                                    {isPublished ? '已发布' : '发布文章'}    
-                                    <svg className="icon" id="publish-icon" aria-hidden="true">
-                                        <use xlinkHref="#icon-fabu"></use>
-                                    </svg>
-                                    </span></li>
+                                    {
+                                        isPublished ?
+                                        <li onClick={()=>disPublishArticle(id)}><span>
+                                        取消发布
+                                        <svg className="icon" id="publish-icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-fabu"></use>
+                                        </svg>
+                                        </span></li>
+                                         :
+                                        <li onClick={()=>this.publishArticle(id,item.get('title'))}><span>
+                                        发布文章
+                                        <svg className="icon" id="publish-icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-fabu"></use>
+                                        </svg>
+                                        </span></li> 
+                                    }
                                     <li><span>                
                                     移动文章
                                     <svg className="icon" id="move-icon" aria-hidden="true">
@@ -95,9 +104,9 @@ class ArticleList extends PureComponent {
     deleteArticle(articleId){
         this.props.deleteArticle(articleId,this.props.collectionId,this.props.myEditor);
     }
-    publishArticle(articleId){
+    publishArticle(articleId,title){
         if(this.props.publishedArticleList.indexOf(articleId) === -1){
-            this.props.publishArticle(articleId);
+            this.props.publishArticle(articleId,title);
         }
     }
     newArticle(collectionId){
@@ -116,6 +125,7 @@ const mapStateToProps = (state) => (
         myEditor: state.getIn(['write', 'myEditor']),
         user: state.getIn(['login', 'user']),
         publishedArticleList: state.getIn(['write', 'publishedArticleList']),
+        showModal: state.getIn(['write', 'showModal']),
     }
 )
 
@@ -130,8 +140,12 @@ const mapDispatchToProps = (dispatch) => {
         deleteArticle(articleId,collectionId,editor){
             dispatch(actionCreators.deleteArticle(articleId,collectionId,editor));
         },
-        publishArticle(articleId){
-            dispatch(actionCreators.publishArticle(articleId));
+        publishArticle(articleId,title){
+            dispatch(actionCreators.publishArticle(articleId,title));
+            dispatch(actionCreators.toggleModal(true));
+        },
+        disPublishArticle(articleId){
+            dispatch(actionCreators.disPublishArticle(articleId));
         }
     }
 }

@@ -3,6 +3,7 @@ import { ListContainer,Button,NewCollection,NewCollectionNameInput,CollectionNam
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
 import { Link } from 'react-router-dom';
+import HintModal from '../components/hintModal';
 require('./menu.css')
 class CollectionList extends PureComponent {
 
@@ -71,6 +72,7 @@ class CollectionList extends PureComponent {
                     );
                 })
             }
+            <HintModal>aaa</HintModal>
         </ListContainer>
       );
     }

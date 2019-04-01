@@ -304,3 +304,164 @@ export const Text = styled.div`
 `;
 
 
+export const PublishedModal = styled.div`
+    width: 100%;
+    height: 100%;
+    .top {
+        background: #f2f2f2;
+        text-align: center;
+        padding: 80px 0 60px 0;
+        .title {
+            display: inline-block;
+            height: 40px;
+            font-size: 28px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 24px;
+            :hover {
+                text-decoration:underline
+            }
+        }
+        .published-hint {
+            font-size: 16px;
+            font-weight: 600;
+            color: #42c02e;
+            .icon {
+                margin: 0 8px 0 0;
+            }
+            :hover {
+                color: #3bab29;
+            }
+        }
+    }
+    .bottom {
+        overflow:hidden;
+        margin: 20px 400px 0 400px;
+        box-sizing: border-box;
+        .article-cover {
+            text-align: center;
+            padding: 80px 0 0 0;
+            img {
+                width: 300px;
+                height: 200px;
+                border-radius: 10px;
+                margin: 0 0 20px 0;
+            }
+        }
+        .bottom-hint {
+            padding: 30px 0 0 0;
+            float: left;
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(0,0,0,.65);
+            clear: both;
+        }
+        #user-photo {
+            margin: 25px 0 0 0;
+            float: right;
+        }
+        .search {
+            box-sizing: border-box;
+            margin: 25px 0 0 0;
+            float: right;
+            border: 1px solid #d9d9d9;
+            position: relative;
+            width: 200px;
+            height: 34px;
+            border-radius: 17px;
+            padding: 5px 20px 5px 30px;
+            .icon {
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                margin-top: -8px;
+                font-size: 16px;
+                color: rgba(0,0,0,.45);
+                cursor: pointer;
+            }
+            input {
+                box-sizing: border-box;
+                line-height: 24px;
+                height: 24px;
+                width: 100%;
+                font-size: 14px;
+                background-color: transparent;
+                width: 140px;
+                border: 0;   
+	            outline:none;
+            }
+        }
+        .anthology-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 30px 0 0 0;
+            .anthology-title {
+                margin-bottom: 0;
+                height: 40px;
+                line-height: 40px;
+                padding: 0 6px 0 14px;
+                background-color: #f2f2f2;
+                font-size: 14px;
+                color: rgba(0,0,0,.85);
+                font-weight: 700;
+                border: 1px solid #f2f2f2;
+            }
+        }
+    }
+    .hide-btn {
+        position: absolute;
+        top: 40px;
+        right: 100px;
+        cursor: pointer;
+    }
+`;
+
+export const AnthologyContainer = styled.div`
+    overflow: hidden;
+    width: calc(50% - 2px);
+    float: left;
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    padding: 10px 0;
+    img {
+        display: inline;
+        float: left;
+        width: 40px;
+        height: 40px;
+        padding: 0 10px;
+    }
+    .title {
+        font-weight: 700;
+        color: #595959;
+    }
+    .desc {
+        font-weight: 400;
+        font-style: normal;
+        color: #999;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+    .post {
+        display: inline;
+        padding-right: 15px;
+        line-height: 40px;
+        font-size: 14px;
+        float: right;
+        color: #42c02e;
+        cursor: pointer;
+    }
+`;
+
+export const HintModalContainer = styled.div`
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999999;
+    outline: 0;
+    background: #fff;
+    opacity: 0.7;
+`

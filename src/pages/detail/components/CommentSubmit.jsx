@@ -23,6 +23,7 @@ class CommentSubmit extends PureComponent {
             >
             <textarea placeholder='写下你的评论...'
                       onFocus={()=>this.toggeleSend(true)}
+                      onKeyDown={(e)=>this.checkSend(e,commentType,articleId,userId,this.content.value)}
                       ref={(textarea)=>{this.content = textarea}}
                       defaultValue={commentType === 2 ? '@'+this.props.quotedUserNickname+' ': ''}
             >
@@ -61,7 +62,7 @@ class CommentSubmit extends PureComponent {
         }
     }
     submitComment(commentType,articleId,userId,content){
-        const {parentId,quotedUserId,submitComment,submitReply,toggleReply} = this.props
+        const {commentId,parentId,quotedUserId,submitComment,submitReply,toggleReply} = this.props
         if(toggleReply !== undefined){
             toggleReply(true)
         }
@@ -71,9 +72,15 @@ class CommentSubmit extends PureComponent {
             if(commentType === 1){
                 submitComment(articleId,userId,content)
             }else{
-                submitReply(parentId,articleId,userId,content,quotedUserId)
+                submitReply(commentId,parentId,articleId,userId,content,quotedUserId)
             }
             this.toggeleSend(false);
+        }
+    }
+    checkSend(e,commentType,articleId,userId,content){
+        let code = e.charCode || e.keyCode
+        if(e.ctrlKey && code === 13){
+            this.submitComment(commentType,articleId,userId,content)
         }
     }
 }
@@ -89,8 +96,8 @@ const mapDispatch = (dispatch) =>({
     submitComment(articleId,userId,content){
         dispatch(actionCreators.submitComment(articleId,userId,content))
     },
-    submitReply(parentId,articleId,userId,content,quotedUserId){
-        dispatch(actionCreators.submitReply(parentId,articleId,userId,content,quotedUserId))
+    submitReply(commentId,parentId,articleId,userId,content,quotedUserId){
+        dispatch(actionCreators.submitReply(commentId,parentId,articleId,userId,content,quotedUserId))
     }
 })
 

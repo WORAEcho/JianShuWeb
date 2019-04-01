@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { DetailWrapper,Header,Content,Author,AuthorBottom,Supprot,ArticleFoot } from './components/style'
+import { DetailWrapper,Header,Content,Author,AuthorBottom,MetaBottom,Supprot,ArticleFoot } from './components/style'
 import { withRouter,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from './store'
@@ -23,7 +23,9 @@ class Detail extends PureComponent {
                 <Author>
                     <Link to={'/userhome/'+articleDetail.userId}><Avatar src={articleDetail.avatar_img}></Avatar></Link>
                     <div style={{display: 'inline-block',marginLeft: '8px'}}>
-                    <Link to={'/userhome/'+articleDetail.userId} style={{textDecoration: 'none'}}><span className='author-name'>{articleDetail.nickname}</span></Link>
+                    <Link to={'/userhome/'+articleDetail.userId} style={{textDecoration: 'none'}}>
+                        <span className='author-name'>{articleDetail.nickname}</span>
+                    </Link>
                     <FollowButton className='follow-button' id='follow-button' writerId={articleDetail.userId}>关注</FollowButton>
                     <div>
                     <span>{moment(articleDetail.update_time).format('YYYY-MM-DD HH:mm:ss')}</span>
@@ -38,7 +40,6 @@ class Detail extends PureComponent {
                 <Supprot>
                     <p>小礼物走一走，来简书关注我</p>
                     <div className='support-button'>赞赏支持</div>
-                    <div>赞赏者</div>
                 </Supprot>
                 <ArticleFoot>
                     <svg className='icon' aria-hidden="true">
@@ -52,7 +53,9 @@ class Detail extends PureComponent {
                 <AuthorBottom>
                     <Link to={'/userhome/'+articleDetail.userId}><Avatar src={articleDetail.avatar_img}></Avatar></Link>
                     <div style={{display: 'inline-block',marginLeft: '8px'}}>
-                    <Link to={'/userhome/'+articleDetail.userId} style={{textDecoration: 'none'}}><span className='author-name'>{articleDetail.nickname}</span></Link>
+                    <Link to={'/userhome/'+articleDetail.userId} style={{textDecoration: 'none'}}>
+                          <span className='author-name'>{articleDetail.nickname}</span>
+                    </Link>
                     <svg className='icon' aria-hidden="true">
                             <use xlinkHref={articleDetail.gender === 1 ? "#icon-nan" : "#icon-nv"}></use>
                     </svg>
@@ -64,12 +67,29 @@ class Detail extends PureComponent {
                     </div>
                     <FollowButton className='follow-button' id='follow-button' writerId={articleDetail.userId}>关注</FollowButton>
                 </AuthorBottom>
-                <div style={{overflow:'hidden',margin: '20px 0'}}>
+                <MetaBottom>
                     <LikeButton articleId={this.props.match.params.id}></LikeButton>
-                    <div style={{float: 'right'}}>
-                        分享
+                    <div className='share'>
+                        <div className='share-circle'> 
+                            <svg className='icon' aria-hidden="true">
+                                <use xlinkHref='#icon-weixin'></use>
+                            </svg>
+                        </div>
+                        <div className='share-circle'> 
+                            <svg className='icon' aria-hidden="true">
+                                <use xlinkHref='#icon-weibo'></use>
+                            </svg>
+                        </div>
+                        <div className='share-circle'> 
+                            <svg className='icon' aria-hidden="true">
+                                <use xlinkHref='#icon-qqkongjian'></use>
+                            </svg>
+                        </div>
+                        <div className='share-circle' id='more-share'> 
+                            更多分享
+                        </div>
                     </div>
-                </div>
+                </MetaBottom>
                 <div>
                 <Avatar src={avatarImg} style={{margin: '0'}}></Avatar>
                 <CommentSubmit commentType={1}></CommentSubmit>

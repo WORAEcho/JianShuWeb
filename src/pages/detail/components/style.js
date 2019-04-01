@@ -50,8 +50,7 @@ export const AuthorBottom = styled.div`
     border-radius: 4px;
     margin: 20px 0 40px 0;
     .icon {
-    font-size: 15px;
-
+        font-size: 14px;
         margin: 0;
     }
     img {
@@ -78,6 +77,40 @@ export const AuthorBottom = styled.div`
     }
 `;
 
+export const MetaBottom = styled.div`
+    overflow: hidden;
+    margin: 20px 0;
+    .share {
+        float: right;
+        box-sizing: border-box;
+        .share-circle {
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            box-sizing: border-box;
+            .icon {
+                font-size: 28px;
+            }
+            &#more-share {
+                width: auto;
+                border-radius: 50px;
+                padding: 4px 18px;
+                font-size: 14px;
+                color: #9b9b9b;
+                line-height: 40px;
+            }
+            :hover {
+                cursor: not-allowed;
+                background-color: hsla(0,0%,71%,.1);
+            }
+        }
+
+    }
+`;
 
 export const Content = styled.div`
     color: #2f2f2f;
@@ -113,7 +146,7 @@ export const Supprot = styled.div`
         color: #fff;
         background-color: #ea6f5a;
         border-radius: 20px;
-        cursor: pointer;
+        cursor: not-allowed;
     }
 `;
 export const ArticleFoot = styled.div`
@@ -135,6 +168,7 @@ export const ArticleFoot = styled.div`
     .report {
         float:right;
         padding-right: 20px;
+        cursor: not-allowed;
     }
 `;
 
@@ -303,7 +337,7 @@ export const CommentListContainer = styled.div`
         color: #969696;
         font-size: 14px;
         float: right;
-        cursor: pointer;
+        cursor: not-allowed;
         &.reply {
             margin: 0 10px 0 0;
             font-size: 12px;
@@ -333,12 +367,20 @@ export const CommentListContainer = styled.div`
                 color: #ea6f5a;
             }
             span {
-                color: #333;
+                color: #333333;
             }
         }
         &.reply {
             float: right;
             margin: 0;
+        }
+        &.active {
+            .icon {
+                color: #ea6f5a;
+            }
+            span {
+                color: #333333;
+            }
         }
     }
 `;
@@ -408,7 +450,7 @@ export const ReplyListContainer = styled.div`
         color: #969696;
         font-size: 14px;
         float: right;
-        cursor: pointer;
+        cursor: not-allowed;
         &.reply {
             margin: 0 10px 0 0;
             font-size: 12px;

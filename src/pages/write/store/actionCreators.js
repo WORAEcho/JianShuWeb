@@ -40,7 +40,17 @@ const changePublishedArticleList = (articleId,operation) => ({
     operation
 })
 
+const setPublishingArticleInfo = (id,title) => ({
+    type: constants.SET_PUBLISHING_ARTICLE_INFO,
+    id,
+    title
+})
 
+
+export const toggleModal = (status) => ({
+    type: constants.TOGGLE_MODAL,
+    status
+})
 
 export const setCollectionId = (id) => ({
     type: constants.CHANGE_COLLECTION_ID,
@@ -174,17 +184,33 @@ export const saveArticle = (id,title,content,pureContent) => {
     }
 }
 
-export const publishArticle = (id) => {
+export const publishArticle = (id,title) => {
     return (dispatch) => {
         axios.put(URL+'article/published?articleId='+id).then((res)=>{
             if(res.data === 1){
+                dispatch(setPublishingArticleInfo(id,title))
                 dispatch(changePublishedArticleList(fromJS(id),fromJS('add')))
             }else{
                 console.log('修改发布列表失败')
             }
         }).catch((e)=>{
             console.log(e)
-            console.log('修改发布列表失败')
+            console.log('发布失败')
+        })
+    }
+}
+
+export const disPublishArticle = (id) => {
+    return (dispatch) => {
+        axios.put(URL+'article/dispublish?articleId='+id).then((res)=>{
+            if(res.data === 1){
+                dispatch(changePublishedArticleList(fromJS(id),fromJS('subtract')))
+            }else{
+                console.log('修改发布列表失败')
+            }
+        }).catch((e)=>{
+            console.log(e)
+            console.log('取消发布失败')
         })
     }
 }
@@ -194,7 +220,7 @@ export const publishedArticleIdList = (userId) => {
         axios.get(URL+'article/published/id?userId='+userId).then((res)=>{
             dispatch(initPublishedArticleList(fromJS(res.data)))
         }).catch(()=>{
-            console.log('发布失败')
+            console.log('修改发布列表失败')
         })
     }
 }

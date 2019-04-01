@@ -1,9 +1,9 @@
 
 import React, { PureComponent } from 'react';
 import { ReplyListContainer } from './style'
-import { withRouter } from 'react-router-dom';
+import { withRouter,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { actionCreators } from '../store'
+import { actionCreators } from '../store'
 // import { Followbutton } from '../../all-writers/components/style';
 import { Avatar } from '../../../common/header/style';
 import CommentSubmit from '../components/CommentSubmit.jsx';
@@ -19,17 +19,20 @@ class Reply extends PureComponent {
     })
 
     render(){
-        const { userId,replyItem } =this.props;
+        const { userId,replyItem,commentId,toggleLikeComment } =this.props;
         const style=this.props.last === true ? {borderTop:'none',borderBottom:'none',padding:'10px 0 5px 15px'} : {borderTop:'none',borderBottom:'1px solid #f0f0f0',padding:'10px 0 5px 15px'};
 
         return (
             <ReplyListContainer style={style}>
+
                 <div style={{margin:'0 0 5px 0'}}>
-                <Avatar src={replyItem.get('avatar_img')}></Avatar>
+                <Link target="_blank"  to={'/userhome/'+replyItem.get('user_id')} style={{textDecoration: 'none'}}>
+                    <Avatar src={replyItem.get('avatar_img')}></Avatar>
+                </Link>
                 <div style={{margin:'0 0 0 48px'}}>
-
-                <span className='nick reply'>{replyItem.get('nickname')} ：</span>
-
+                <Link target="_blank"  to={'/userhome/'+replyItem.get('user_id')} style={{textDecoration: 'none'}}>
+                    <span className='nick reply'>{replyItem.get('nickname')} ：</span>
+                </Link>
                 <span className='content reply'>{replyItem.get('content')}</span>
                 </div>
                 </div>
@@ -42,11 +45,13 @@ class Reply extends PureComponent {
                         </svg>
                     </div>
 
-                    <div className='func-block reply'>
-                    <span className='like reply' >{replyItem.get('like_count')}</span>
-                    <svg className='icon reply' aria-hidden="true">     
-                        <use xlinkHref='#icon-z-like'></use>
-                    </svg>
+                    <div className={replyItem.get('liked') === 1 ? 'func-block reply active' : 'func-block reply'}
+                         onClick={()=>toggleLikeComment(userId,replyItem.get('id'),replyItem.get('liked'),replyItem.get('likedId'),commentId)}
+                    >
+                        <span className='like reply' >{replyItem.get('likeTotal')}</span>
+                        <svg className='icon reply' aria-hidden="true">     
+                            <use xlinkHref='#icon-z-like'></use>
+                        </svg>
                     </div>
 
                     <span className='desc reply'>{dateDiff(replyItem.get('create_time'))}</span>
@@ -62,6 +67,7 @@ class Reply extends PureComponent {
                     this.state.showSubmit ? 
                     <CommentSubmit 
                         toggleSubmit={this.toggleSubmit.bind(this)} 
+                        commentId={commentId}
                         commentType={2}
                         parentId={replyItem.get('id')}
                         quotedUserId={replyItem.get('user_id')}
@@ -107,7 +113,19 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) =>({
-   
+    //toggleLikeComment被comment调用时，参数为commentId;被reply调用时，参数为replyId(原commentId),commentId(parentId)
+    toggleLikeComment(userId,replyId,liked,likedId,commentId){
+        if(userId !== ''){
+            if(liked === 1){
+                //如果是reply而不是comment,则增加一个true参数
+                dispatch(actionCreators.deleteLikeComment(userId,replyId,likedId,true,commentId))
+            }else{
+                dispatch(actionCreators.addLikeComment(userId,replyId,true,commentId))    
+            }
+        }else{
+            this.history.push('/login');
+        }
+    }
 })
 
 export default connect(mapState, mapDispatch)(withRouter(Reply));

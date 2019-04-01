@@ -20,8 +20,7 @@ class SettingRightBasic extends PureComponent {
                     <tr id='basic-tr1'>
                         <td className='basic-td-left'>
                             <div>
-                                <img className='avatar-img' src={this.state.photoUrl} alt='fail'>
-                                </img>
+                                <img className='avatar-img' src={this.state.photoUrl} alt='fail'/>
                             </div>
                         </td>
                         <td className='basic-td-right'>

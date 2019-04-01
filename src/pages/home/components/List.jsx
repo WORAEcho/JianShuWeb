@@ -8,7 +8,6 @@ import moment from 'moment';
 class List extends PureComponent {
     render(){
         const { list,getMoreList,articlePageCount,articlePageNum } =this.props;
-
         return (
             <div>
                 {
@@ -17,24 +16,27 @@ class List extends PureComponent {
                         return (
                             <Link key={item.get('articleId')} to={'/detail/' + item.get('articleId')}>
                                 <ListItem>
-                                <ListInfo>
+                                <ListInfo style={item.get('cover_img') === undefined ? {width: '620px'} : {width: '450px'}}>
                                     <h3 className='title'>{item.get('title')}</h3>
                                     <p className='desc' 
                                     dangerouslySetInnerHTML = 
-                                    {{__html: content.length <= 60 ? content : content.substr(0,60)+'...'}}>
+                                    {{__html: content.length <= 100 ? content : content.substr(0,100)+'...'}}>
                                     </p>
                                     <span className='article-bottom'>{item.get('nickname')}</span>
                                     <svg className='article-bottom icon' aria-hidden="true">
                                         <use xlinkHref="#icon-pinglun2"></use>
                                     </svg>
-                                    <span className='article-bottom'>99</span>
+                                    <span className='article-bottom'>{item.get('commentTotal')}</span>
                                     <svg className='article-bottom icon' aria-hidden="true">
                                         <use xlinkHref="#icon-aixin"></use>
                                     </svg>
                                     <span className='article-bottom'>{item.get('likeNum')}</span>
                                     <span className='article-bottom'>{moment(item.get('update_time')).format('YYYY-MM-DD HH:mm:ss')}</span>
                                 </ListInfo>
-                                {/* <img alt='' className='list-pic' src={item.get('imgUrl')} /> */}
+                                {
+                                    item.get('cover_img') === undefined ? null :
+                                    <img alt='' className='list-pic' src={item.get('cover_img')} />
+                                }
                                 </ListItem>
                             </Link>
                         );
