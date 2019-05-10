@@ -7,11 +7,11 @@ import { getUrlParam,dateDiff,highlightKeyWord } from '../../../common/function/
 import { actionCreators } from '../store'
 import './ArticleList.css';
 import { Avatar } from '../../all-writers/components/style';
-
+import moment from 'moment';
 class ArticleList extends PureComponent {
 
     render(){
-        const { list } = this.props
+        const { list,totalPage } = this.props
         return (
                 <RightContent>
                     <div style={{paddingBottom: '10px'}}>
@@ -19,7 +19,7 @@ class ArticleList extends PureComponent {
                         <span className='orderItem'>最近更新 · </span>
                         <span className='orderItem'>热门专题   |</span>
                         <span className='orderItem'>时间不限</span>
-                        <span className='totalCount'>1269 个结果</span>
+                        <span className='totalCount'>{totalPage} 个结果</span>
                     </div>
                     
                 {
@@ -29,13 +29,13 @@ class ArticleList extends PureComponent {
                             <ListItem  key={item.get('articleId')}>
                             <ListInfo id='search-listInfo'>
                             <div id='search-author'>
-                            <Link to={'userHome/'+item.get('userId')}>
+                            <Link to={'userhome/'+item.get('userId')}>
                                 <Avatar id='search-articlelist-avatar' src={item.get('avatar_img')}></Avatar>
                             </Link>
-                            <Link to={'userHome/'+item.get('userId')}>
+                            <Link to={'userhome/'+item.get('userId')}>
                                 <span id='search-articlelist-username' className='article-bottom'>{item.get('nickname')}</span>
                             </Link>
-                            <span id='search-article-time' className='article-bottom'>{dateDiff(item.get('update_time'))}</span>
+                            <span id='search-article-time' className='article-bottom'>{dateDiff(moment(item.get('update_time')))}</span>
                             </div>
                             <Link to={'/detail/' + item.get('articleId')}>
                                 <h3 id='search-title' 
@@ -56,7 +56,6 @@ class ArticleList extends PureComponent {
                             </svg>
                             <span className='article-bottom'>{item.get('likeNum')}</span>
                             </ListInfo>
-                            {/* <img alt='' className='list-pic' src={item.get('imgUrl')} /> */}
                             </ListItem>
                         );
                     })
@@ -83,14 +82,13 @@ class ArticleList extends PureComponent {
 const mapStateToProps = (state) => {
     return {
         list: state.getIn(['search','articleList']),
-        totalPage: state.getIn(['search','totalPage']),
+        totalPage: state.getIn(['search','articleTotalPage']),
         login: state.getIn(['login','login']),
         userId: state.getIn(['login','userId'])
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log('changeHistory')
     return {
         getArticleList(fuzzyKey,pageNum){
             if(localStorage.getItem('search_history') === null ){
@@ -111,7 +109,6 @@ const mapDispatchToProps = (dispatch) => {
                 }
                 localStorage.setItem('search_history',JSON.stringify(searchHistoryArray));
             }
-            console.log('done')
             dispatch(actionCreators.getArticleList(fuzzyKey,pageNum));
         }
     }

@@ -54,7 +54,7 @@ class Reply extends PureComponent {
                         </svg>
                     </div>
 
-                    <span className='desc reply'>{dateDiff(replyItem.get('create_time'))}</span>
+                    <span className='desc reply'>{dateDiff(Date.parse(replyItem.get('create_time')))}</span>
 
                     {
                         userId === replyItem.get('user_id') ?

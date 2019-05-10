@@ -19,6 +19,11 @@ const changeCollectionList = (collectionList) => ({
     collectionList
 })
 
+const changeCollectionName = (id,collectionName) => ({
+    type: constants.CHANGE_COLLECTION_NAME,
+    id,
+    collectionName
+})
 const changeArticleList = (articleList) => ({
     type: constants.CHANGE_ARTICLE_LIST,
     articleList
@@ -113,6 +118,21 @@ export const newCollection = (user,collectionName,editor) => {
     }
 }
 
+export const updateCollectionName = (id,collectionName) => {
+    return (dispatch) => {
+        axios.put(URL+'collection?id='+id+'&collectionName='+collectionName).then((res)=>{
+            if(res.data === 1){
+                dispatch(changeCollectionName(id,collectionName))
+            }else{
+                alert('更新文集名失败！')
+            }
+        }).catch((e)=>{
+            console.log(e)
+            alert('更新文集名失败')
+        })
+    }
+}
+
 export const getArticleList = (collectionId,editor) => {
     return (dispatch) => {
         axios.get(URL+'article?collectionId='+collectionId).then((res)=>{
@@ -139,11 +159,13 @@ export const getArticleWithEditor = (articleId,editor) => {
     return (dispatch) => {
         axios.get(URL+'article_content?articleId='+articleId).then((res)=>{
             if(editor !== undefined){
-                if(res.data.content === null || res.data.content === ""){
+                if(res.data.content === null || res.data.content === "" || res.data.content === undefined){
                     editor.txt.html('');
                 }else{
                     editor.txt.html(res.data.content);
                 }
+            }else{
+                console.log('no editor')
             }
             dispatch(setArticle(fromJS(articleId),fromJS(res.data.title),fromJS(res.data.content)));
         })
@@ -184,9 +206,9 @@ export const saveArticle = (id,title,content,pureContent) => {
     }
 }
 
-export const publishArticle = (id,title) => {
+export const publishArticle = (id,title,userId) => {
     return (dispatch) => {
-        axios.put(URL+'article/published?articleId='+id).then((res)=>{
+        axios.put(URL+'article/published?articleId='+id+'&userId='+userId).then((res)=>{
             if(res.data === 1){
                 dispatch(setPublishingArticleInfo(id,title))
                 dispatch(changePublishedArticleList(fromJS(id),fromJS('add')))
@@ -239,6 +261,37 @@ export const deleteArticle = (articleId,collectionId,editor) => {
         })
     }
 }
+
+export const getAnthlogyList = (pageNum,pageSize) => {
+    return (dispatch) => {
+        axios.get(URL+'anthology?pageNum='+pageNum+'&pageSize='+pageSize).then((res)=>{
+            dispatch(setAnthlogyList(res.data.list))
+        }).catch((e)=>{
+            console.log(e)
+            alert('请求专题失败！')
+        })
+    }
+}
+
+export const postArticle = (publishingId) => {
+    return (dispatch) => {
+        axios.post(URL+'article/post?publishingId='+publishingId).then((res)=>{
+            if(res.data === 1){
+                alert('投稿成功！')
+            }else{
+                alert('投稿失败！')
+            }
+        }).catch((e)=>{
+            console.log(e)
+            alert('投稿失败！')
+        })
+    }
+}
+
+export const setAnthlogyList = (res) => ({
+    type: constants.SET_ANTHLOGYLIST,
+    res
+})
 
 export const ifSaved = (res) => ({
     type: constants.IFSAVED,

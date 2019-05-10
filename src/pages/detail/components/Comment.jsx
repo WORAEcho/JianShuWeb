@@ -27,7 +27,7 @@ class Comment extends PureComponent {
                     <Avatar src={commentItem.get('avatar_img')}></Avatar>
                     <span className='nick'>{commentItem.get('nickname')}</span>
                 </Link>
-                <span className='desc'>{dateDiff(commentItem.get('create_time'))}</span>
+                <span className='desc'>{dateDiff(Date.parse(commentItem.get('create_time')))}</span>
                 </div>
                 <div className='content'>{commentItem.get('content')}</div>
                 <div style={{padding: '0 0 10px 0'}}>

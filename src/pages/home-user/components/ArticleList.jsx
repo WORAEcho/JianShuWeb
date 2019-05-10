@@ -23,20 +23,19 @@ class ArticleList extends PureComponent {
                                     {{__html: content.length <= 60 ? content : content.substr(0,60)+'...'}}>
                                     </p>
                                     <svg className='article-bottom icon' aria-hidden="true">
-                                        <use xlinkHref="#icon-liulanliang"></use>
-                                    </svg>
-                                    <span className='article-bottom'>999</span>
-                                    <svg className='article-bottom icon' aria-hidden="true">
                                         <use xlinkHref="#icon-pinglun2"></use>
                                     </svg>
-                                    <span className='article-bottom'>99</span>
+                                    <span className='article-bottom'>{item.get('commentNum')}</span>
                                     <svg className='article-bottom icon' aria-hidden="true">
                                         <use xlinkHref="#icon-aixin"></use>
                                     </svg>
                                     <span className='article-bottom'>{item.get('likeNum')}</span>
                                     <span className='article-bottom'>{moment(item.get('update_time')).format('YYYY-MM-DD HH:mm:ss')}</span>
                                 </ListInfo>
-                                {/* <img alt='' className='list-pic' src={item.get('imgUrl')} /> */}
+                                {
+                                    item.get('cover_img') === undefined ? null :
+                                    <img alt='' className='list-pic' src={item.get('cover_img')} />
+                                }
                                 </ListItem>
                             </Link>
                         );
@@ -63,8 +62,6 @@ class ArticleList extends PureComponent {
 
 const mapState = (state) =>({
     writerId: state.getIn(['userHome','writerId']),
-    articlePageCount: state.getIn(['home','articlePageCount']),
-    articlePageNum: state.getIn(['home','articlePageNum']),
     articleList: state.getIn(['userHome','articleList']),
     pageSum: state.getIn(['userHome','pageSum']),
     pageNum: state.getIn(['userHome','pageNum'])

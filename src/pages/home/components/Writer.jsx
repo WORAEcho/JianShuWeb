@@ -38,7 +38,7 @@ class Writer extends PureComponent {
                             return (
                                 <WriterItem key={writerId}>
                                     <WriterInfo>
-                                        <Link to={'userHome/'+writerId}>
+                                        <Link to={'userhome/'+writerId}>
                                         <img className='avatar_img' src={item.get('avatarImg')} alt='加载失败'></img>
                                         </Link>
                                         <FollowButtom onClick={()=>this.changeFollow(userId,writerId,unFollowed)}
@@ -52,7 +52,7 @@ class Writer extends PureComponent {
                                             {unFollowed ? '关注' : this.state.unfollowState ? '取消关注' : '已关注'}
                                         </span>
                                         </FollowButtom>
-                                        <Link to={'userHome/'+writerId}><span className='writer_name'>{item.get('nickname')}</span></Link>
+                                        <Link to={'userhome/'+writerId}><span className='writer_name'>{item.get('nickname')}</span></Link>
                                         <span className='writer_desc'>写了{item.get('wordCount')}字 · {item.get('likeNum')}喜欢</span>
                                     </WriterInfo>
                                 </WriterItem>

@@ -1,0 +1,1 @@
+export const SET_SUBSCRIPTIONS_LIST = 'subscriptions/SET_SUBSCRIPTIONS_LIST'

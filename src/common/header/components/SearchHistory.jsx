@@ -22,7 +22,7 @@ class SearchHistory extends Component {
                     <div key={historyList[i]}>
                     <SearchInfoList className='search-history'>
                         <Link target="_blank" 
-                              to={'search?fuzzyKey='+historyList[i]+'&pageNum=1'} 
+                              to={'/search?fuzzyKey='+historyList[i]+'&pageNum=1'} 
                               style={{textDecoration: 'none'}}
                         >
                             <SearchHistoryList>

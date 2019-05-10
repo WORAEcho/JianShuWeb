@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react';
-import { ListContainer,Button,NewCollection,NewCollectionNameInput,CollectionName } from './styled';
+import { ListContainer,Button,NewCollection,NewCollectionNameInput,UpdateCollectionNameInput,CollectionName } from './styled';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
 import { Link } from 'react-router-dom';
-import HintModal from '../components/hintModal';
+// import HintModal from '../components/hintModal';
 require('./menu.css')
 class CollectionList extends PureComponent {
 
     state = {
         showNewCollection: '',
-        showMenu: false
+        showMenu: false,
+        ifUpdateCollectionName: false
       }
 
     render() {
@@ -37,14 +38,36 @@ class CollectionList extends PureComponent {
                 collectionList.map((item)=>{
                     let id=item.get('id');
                     return (
-                        <CollectionName className={collectionId === id ? 'item active' : 'item' } key={id} onClick={()=>this.selectCollection(id)}>
-                        <span >{item.get('collectionName')}</span>
-                        <svg className={collectionId === id ? this.state.showMenu? 'setting icon active clicked' : 'setting icon active' : 'setting icon hidden' } 
-                             aria-hidden="true" 
-                             onClick={()=>this.toggleMenu('toggle')}
-                        >
-                            <use xlinkHref="#icon-Setting"></use>
-                        </svg>
+                        <CollectionName className={collectionId === id ? 'item active' : 'item' } key={id} onClick={()=>this.selectCollection(id,collectionId)}>
+                        {
+                            this.state.ifUpdateCollectionName && collectionId === id  ? 
+                            <div>
+                                <UpdateCollectionNameInput defaultValue={item.get('collectionName')} ref={(input)=>{this.collectionNameInput=input}}/>
+                                <svg className="icon updateCollectionNameButtom"
+                                    aria-hidden="true" 
+                                    onClick={()=>this.updateCollectionName(id,item.get('collectionName'),this.collectionNameInput.value)}
+                                >
+                                    <use xlinkHref="#icon-gou"></use>
+                                </svg>
+                                <svg className="icon updateCollectionNameButtom cancel"
+                                    aria-hidden="true" 
+                                    onClick={()=>this.toggleUpdateCollectionName(false)}
+                                >
+                                    <use xlinkHref="#icon-cha"></use>
+                                </svg>
+                            </div>
+                            :
+                            <div>
+                                <span>{item.get('collectionName')}</span>
+                                <svg className={collectionId === id ? this.state.showMenu? 'setting icon active clicked' : 'setting icon active' : 'setting icon hidden' } 
+                                    aria-hidden="true" 
+                                    onClick={()=>this.toggleMenu('toggle')}
+                                >
+                                    <use xlinkHref="#icon-Setting"></use>
+                                </svg>
+                            </div>
+                        }
+
                         {
                             collectionId === id && this.state.showMenu ? 
                             <div id='collection-menu'>
@@ -53,7 +76,7 @@ class CollectionList extends PureComponent {
                                     onMouseOver={()=>this.toggleMenu(true)}
                                     onMouseLeave={()=>this.toggleMenu(false)}
                                 >
-                                <li><span>    
+                                <li onClick={()=>this.toggleUpdateCollectionName(true)}><span>    
                                 修改文集            
                                 <svg className="icon" id="update-icon" aria-hidden="true">
                                     <use xlinkHref="#icon-xiugai"></use>
@@ -72,7 +95,6 @@ class CollectionList extends PureComponent {
                     );
                 })
             }
-            <HintModal>aaa</HintModal>
         </ListContainer>
       );
     }
@@ -99,11 +121,30 @@ class CollectionList extends PureComponent {
             showNewCollection: false,
         })
     }
-    selectCollection = (id) => {
-        this.props.setCollectionId(id);
-        this.props.getArticleList(id,this.props.myEditor);
+    selectCollection = (id,collectionId) => {
+        //不加判断则更改文集名时点击input会触发此方法，导致失焦
+        if(id !== collectionId){
+            this.props.setCollectionId(id);
+            this.props.getArticleList(id,this.props.myEditor);
+        }
     }
-
+    toggleUpdateCollectionName = (state) => {
+        this.setState({
+            ifUpdateCollectionName: state
+        })
+    }
+    updateCollectionName = (id,beforeCollectionName,updatedCollectionName) => {
+        if(beforeCollectionName === updatedCollectionName){
+            this.toggleUpdateCollectionName(false)
+        }else{
+            this.props.updateCollectionName(id,updatedCollectionName)
+        }
+    }
+    componentDidUpdate(prevProps) {
+        if (this.props.collectionId !== prevProps.collectionId || this.props.collectionList !== prevProps.collectionList) {
+            this.toggleUpdateCollectionName(false)
+        }
+    }
 }
 
 const mapStateToProps = (state) => (
@@ -130,6 +171,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         newCollection(user,collectionId,editor){
             dispatch(actionCreators.newCollection(user,collectionId,editor));
+        },
+        updateCollectionName(id,collectionName){
+            dispatch(actionCreators.updateCollectionName(id,collectionName));
         }
     }
 }

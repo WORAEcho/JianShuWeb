@@ -12,6 +12,9 @@ import {
  import SearchHistory from '../../../common/header/components/SearchHistory.jsx'
  
 class SearchLeft extends PureComponent {
+    state=({
+        selected: 1
+    })
     render(){
         const { totalPage, list, page, handleChangePage} = this.props;
         const jsList = list.toJS();
@@ -19,7 +22,7 @@ class SearchLeft extends PureComponent {
         if(jsList.length){
             for (let i = (page-1) * 10; i < page * 10; i++) {
                 pageList.push(
-                    <Link key={jsList[i]} target="_blank" to={'search?fuzzyKey='+jsList[i]+'&pageNum=1'}>
+                    <Link key={jsList[i]} target="_blank" to={'/search?fuzzyKey='+jsList[i]+'&pageNum=1'}>
                         <SearchInfoItem>{jsList[i]}</SearchInfoItem>
                     </Link>
                 )
@@ -28,7 +31,7 @@ class SearchLeft extends PureComponent {
         return (
                 <SettingLeftContainer>
                     <SettingItemUl>
-                        <SettingItemLi onClick={()=>this.switchItem(1)}>
+                        <SettingItemLi onClick={()=>this.switchItem(1)} className={this.state.selected === 1 ? 'active' : ''}>
                             <div className='itemDiv'>  
                                 <div className='iconBackground'>                        
                                     <svg className='icon' aria-hidden="true">
@@ -38,7 +41,7 @@ class SearchLeft extends PureComponent {
                                 <span>文章</span>
                             </div>
                         </SettingItemLi>
-                        <SettingItemLi onClick={()=>this.switchItem(2)}>
+                        <SettingItemLi onClick={()=>this.switchItem(2)} className={this.state.selected === 2 ? 'active' : ''}>
                             <div className='itemDiv'>  
                                 <div className='iconBackground'>                        
                                     <svg className='icon' aria-hidden="true">
@@ -48,7 +51,7 @@ class SearchLeft extends PureComponent {
                                 <span>用户</span>
                             </div>
                         </SettingItemLi>
-                        <SettingItemLi onClick={()=>this.switchItem(3)}>
+                        <SettingItemLi onClick={()=>this.switchItem(3)} className={this.state.selected === 3 ? 'active' : ''}>
                             <div className='itemDiv'>  
                                 <div className='iconBackground'>                        
                                     <svg className='icon' aria-hidden="true">
@@ -80,6 +83,9 @@ class SearchLeft extends PureComponent {
     }
     switchItem(index){
         this.props.switchItem(index)
+        this.setState({
+            selected: index
+        })
     }
 
     componentDidMount(){

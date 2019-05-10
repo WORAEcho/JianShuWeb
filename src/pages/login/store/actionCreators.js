@@ -83,9 +83,9 @@ export const getUserInfo = (account) => {
         axios.get(URL+'user-info?userName='+account).then((res) => {
             const user=res.data;
             dispatch(changeLogin(account));
-            dispatch(setUserAvatarImg(fromJS(user.id),fromJS(user.avatarImg)));
-            dispatch(homeActionCreator.getWriters(fromJS(user.id),fromJS(1)));
-            dispatch(homeActionCreator.initFollwedList(fromJS(user.id)));
+            dispatch(setUserAvatarImg(fromJS(user.userId),fromJS(user.avatarImg)));
+            dispatch(homeActionCreator.getWriters(fromJS(user.userId),fromJS(1)));
+            dispatch(homeActionCreator.initFollwedList(fromJS(user.userId)));
         }).catch(()=>{
             console.log('请求用户信息失败')
         });

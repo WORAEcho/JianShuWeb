@@ -84,7 +84,7 @@ export const Block =styled.div`
         margin: 0 0 0 2px;
         font-size: 6px;
     }
-    &#user-home-block6 {
+    &#user-home-block5 {
         border: 0;
     }
 `;
@@ -125,3 +125,14 @@ export const TriggerMenu =styled.p`
 
 
 
+export const DynamicHeaderWrapper =styled.div`
+    box-sizing: border-box;
+    padding-bottom: 14px;
+    .dynamic-info {
+        font-size: 13px;
+        display: inline-block;
+        padding-left: 10px;
+        color: #969696;
+        vertical-align: middle;
+    }
+`;

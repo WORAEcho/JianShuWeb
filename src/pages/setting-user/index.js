@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 // import Topic from './components/Topic.jsx';
-import { actionCreators } from './store';
 import SettingLeft  from './components/SettingLeft.jsx'
 import SettingRightBasic  from './components/SettingRightBasic.jsx'
 import SettingRightProfile  from './components/SettingRightProfile.jsx'
-import { 
-    UserSettingWrapper,
- } from './components/style';
+import { UserSettingWrapper } from './components/style';
+import { actionCreators } from './store'
+
 class UserSetting extends PureComponent {
     state={
         itemIndex: 1
@@ -38,16 +37,17 @@ class UserSetting extends PureComponent {
         })
     }
     componentDidMount(){
-        this.props.changeHomeData();
+        this.props.getUserInfo(this.props.userId)
     }
 }
 
 const mapState = (state) => ({
+    userId: state.getIn(['login','userId'])
 })
 
 const mapDispatch= (dispatch) => ({
-    changeHomeData(){
-        dispatch(actionCreators.getHomeInfo());
-    }
+    getUserInfo(userId){
+        dispatch(actionCreators.getUserInfo(userId))
+    },
 })
 export default connect(mapState,mapDispatch)(UserSetting);

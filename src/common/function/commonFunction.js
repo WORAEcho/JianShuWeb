@@ -27,7 +27,6 @@ export const dateDiff = (timestamp)=>{
     var year = month * 12;
     var now = new Date().getTime();
     var diffValue = now - timestamp;
-
     // 如果本地时间反而小于变量时间
     if (diffValue < 0) {
         return '不久前';
@@ -53,7 +52,7 @@ export const dateDiff = (timestamp)=>{
     if (yearC >=1) {
         return moment(timestamp).format('YYYY-MM-DD HH:mm:ss');
     } else if (monthC >= 1) {
-        return parseInt(monthC) + "月前";
+        return parseInt(monthC) + "个月前";
     } else if (weekC >= 1) {
         return parseInt(weekC) + "周前";
     } else if (dayC >= 1) {
@@ -62,8 +61,9 @@ export const dateDiff = (timestamp)=>{
         return parseInt(hourC) + "小时前";
     } else if (minC >= 1) {
         return parseInt(minC) + "分钟前";
+    } else {
+        return '刚刚';
     }
-    return '刚刚';
 };
 
 export const highlightKeyWord = (content,keyword)=>{

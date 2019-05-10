@@ -24,8 +24,6 @@ export const SettingItemUl = styled.ul`
     padding: 0;
 `;
 
-
-
 export const SettingItemLi = styled.li`    
     box-sizing: border-box;
     height: 52px;
@@ -34,8 +32,8 @@ export const SettingItemLi = styled.li`
     cursor: pointer;
     border-radius: 4px;
     .itemDiv{
-        line-height: 32px;
-        height: 32px;   
+        line-height: 40px;
+        height: 40px;   
         .iconBackground{
             display: inline-block;
             height: 32px;
@@ -54,29 +52,10 @@ export const SettingItemLi = styled.li`
             font-size: 15px;
         }
     }
-    &.active {
+    &.selected {
         background: #f0f0f0;
     }
     &:hover{
         background: #f0f0f0;
-    }
-`;
-
-export const SendButton = styled.button` 
-    outline:none;
-    border: none;
-    float: right;
-    width: 100px;
-    height: 35px
-    line-height: 35px
-    border-radius: 18px;  
-    font-size: 14px;
-    color: #fff
-    cursor: pointer;
-    text-align: center;
-    background: #3194d0;
-    margin: 2.5px auto;
-    &.disabled{
-        opacity: 0.5;
     }
 `;

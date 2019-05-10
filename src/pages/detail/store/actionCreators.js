@@ -47,17 +47,18 @@ const changeMainComment = (parentId) => ({
 export const getDetail = (articleId) => {
     return (dispatch) =>{
         axios.get(URL+'article/'+articleId+'/published/profile').then((res)=>{
+            console.log(articleId)
             const result=res.data;
-            dispatch(changeDetail(result));
             console.log(res)
+            dispatch(changeDetail(result));
             axios.get(URL+'writer/'+result.userId+'/survey').then((res)=>{
                 const survey=res.data;
                 dispatch(setWriterSurvey(survey));
             }).catch(()=>{
-                alert('请求作者概况失败')
+                alert('请求作者概况失败1')
             })
         }).catch(()=>{
-            alert('请求detail失败')
+            alert('请求作者概况失败')
         })       
     }
 }

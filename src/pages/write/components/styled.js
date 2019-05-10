@@ -68,8 +68,8 @@ export const NewCollection = styled.div`
     margin: 0 0 15px 0;
     cursor: pointer;
     .icon{
-        margin: 0 5px 0 0;
-        font-size: 18px;
+        margin: 2px 5px 2px 0;
+        font-size: 15px;
     }
     .span{
         display: block;
@@ -85,7 +85,19 @@ export const NewCollectionNameInput = styled.input`
     background-color: #595959;
     border: 1px solid #333;
     padding: 4px 6px;
+    border-radius: 2px;
     font-size: 14px;
+    outline: none;
+`;
+
+export const UpdateCollectionNameInput = styled.input`
+    width: 70%;
+    padding: 6px 6px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    autofocus: true; 
 `;
 
 export const CollectionName = styled.div`
@@ -100,7 +112,8 @@ export const CollectionName = styled.div`
     &.active {
         background-color: #666;
         width: calc(100% - 44px - 3px);
-        border-left: 3px solid #ec7259;   
+        border-left: 3px solid #ec7259; 
+        cursor: default;  
     }
     .span{
         overflow: hidden;
@@ -108,7 +121,7 @@ export const CollectionName = styled.div`
         height: 40px;
     }
     .icon{
-        margin: 14px auto;
+        margin: 16px auto;
         float: right;
         font-size: 18px;
         cursor: pointer;
@@ -120,6 +133,21 @@ export const CollectionName = styled.div`
         }
         &:hover {
             color: #ec7259;
+        }
+        &.updateCollectionNameButtom {
+            &.cancel {
+                margin: 17px auto;
+                padding: 0 5px 0 0;
+                font-size: 16px;
+                color: rgb(200, 0, 0);
+                &:hover {
+                    color: rgb(255, 0, 0);
+                }
+            }
+            color: rgb(66, 192, 46);
+            &:hover {
+                color: rgb(66, 230, 46);
+            }
         }
     }
     &:hover{

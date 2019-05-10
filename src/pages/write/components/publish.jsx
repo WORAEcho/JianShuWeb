@@ -13,7 +13,7 @@ class Publish extends PureComponent {
     }
 
     render() {
-        const { hideModal,publishingId,publishingtitle } = this.props
+        const { hideModal,publishingId,publishingtitle,anthology } = this.props
         return (
             <PublishedModal>
                 <div className='top'>
@@ -54,16 +54,15 @@ class Publish extends PureComponent {
     
                     <div className='anthology-container'>
                         <div className='anthology-title'>推荐文集</div>
-                        <Anthology></Anthology>
-                        <Anthology className='right'></Anthology>
-                        <Anthology></Anthology>
-                        <Anthology className='right'></Anthology>
-                        <Anthology></Anthology>
-                        <Anthology className='right'></Anthology>
-                        <Anthology></Anthology>
-                        <Anthology className='right'></Anthology>
-                        <Anthology></Anthology>
-                        <Anthology className='right'></Anthology>
+                        {
+                            anthology.map((item,index)=>{
+                                return <Anthology className={index % 2===1 ? '':'right'} 
+                                                  key={item.id} 
+                                                  publishingId={publishingId}
+                                                  name={item.anthologyName} 
+                                                  avatar={item.anthologyAvatar}></Anthology>
+                            })
+                        }
                     </div>
                 </div>
             </PublishedModal>
@@ -72,7 +71,7 @@ class Publish extends PureComponent {
 
 
     componentDidMount() {
-
+        this.props.getAnthlogyList(1,10)
     }
 
     componentDidUpdate(prevState) {
@@ -105,6 +104,7 @@ class Publish extends PureComponent {
         hideEditor: state.getIn(['write', 'hideEditor']),
         publishingId: state.getIn(['write', 'publishingId']),
         publishingtitle: state.getIn(['write', 'publishingtitle']),
+        anthology: state.getIn(['write', 'anthology']),
     }
 )
 
@@ -112,6 +112,9 @@ class Publish extends PureComponent {
     return {
         hideModal(){
             dispatch(actionCreators.toggleModal(false));
+        },
+        getAnthlogyList(pageNum,pageSize){
+            dispatch(actionCreators.getAnthlogyList(pageNum,pageSize))
         }
     }
 }

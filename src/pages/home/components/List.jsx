@@ -14,15 +14,18 @@ class List extends PureComponent {
                     list.map((item)=>{
                         const content = item.get('pure_content')+"";
                         return (
-                            <Link key={item.get('articleId')} to={'/detail/' + item.get('articleId')}>
-                                <ListItem>
+                                <ListItem key={item.get('articleId')}>
                                 <ListInfo style={item.get('cover_img') === undefined ? {width: '620px'} : {width: '450px'}}>
+                                    <Link  to={'/detail/' + item.get('articleId')} style={{textDecoration: 'none'}}>
                                     <h3 className='title'>{item.get('title')}</h3>
                                     <p className='desc' 
                                     dangerouslySetInnerHTML = 
                                     {{__html: content.length <= 100 ? content : content.substr(0,100)+'...'}}>
                                     </p>
+                                    </Link>
+                                    <Link  to={'/userhome/'+item.get('userId')} style={{textDecoration: 'none'}}>
                                     <span className='article-bottom'>{item.get('nickname')}</span>
+                                    </Link>
                                     <svg className='article-bottom icon' aria-hidden="true">
                                         <use xlinkHref="#icon-pinglun2"></use>
                                     </svg>
@@ -38,7 +41,6 @@ class List extends PureComponent {
                                     <img alt='' className='list-pic' src={item.get('cover_img')} />
                                 }
                                 </ListItem>
-                            </Link>
                         );
                     })
                 }

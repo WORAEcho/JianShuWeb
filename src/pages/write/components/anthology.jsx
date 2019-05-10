@@ -10,14 +10,15 @@ class Anthology extends PureComponent {
     }
 
     render() {
+        const {name,avatar,publishingId,postArticle} = this.props
         return (
             <AnthologyContainer>
-                <img src='http://upload.jianshu.io/collections/images/38/android.graphics.Bitmap_f3edcb1.jpeg' alt=''/>
+                <img src={avatar} alt=''/>
                 <div style={{overflow:'hidden',display: 'inline-block'}}>
-                <span className='title'>读书</span>
+                <span className='title'>{name}</span>
                 <div className='desc'>253.7K篇文章，4093.8K人关注</div>
                 </div>
-                <span className='post'>投稿</span>
+                <span className='post' onClick={()=>postArticle(publishingId)}>投稿</span>
             </AnthologyContainer>
         )
     }
@@ -50,6 +51,9 @@ class Anthology extends PureComponent {
     return {
         hideModal(){
             dispatch(actionCreators.toggleModal(false));
+        },
+        postArticle(publishingId){
+            dispatch(actionCreators.postArticle(publishingId))
         }
     }
 }

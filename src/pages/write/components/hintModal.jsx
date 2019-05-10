@@ -14,7 +14,9 @@ class HintModal extends PureComponent {
 
     render() {
         return (
-            <HintModalContainer></HintModalContainer>
+            <HintModalContainer>
+                <div>aaa</div>
+            </HintModalContainer>
         )
     }
 

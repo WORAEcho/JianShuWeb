@@ -1,0 +1,26 @@
+.bind-mail-title{
+}
+
+.bind-mail-header {
+    padding: 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #F0F0F0;
+}
+.bind-mail-close{
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    font-size: 26px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    cursor:pointer;
+    opacity: .2;
+}
+
+.bind-mail-close:hover{
+    opacity: 1;
+}
+
+.bind-mail-content{
+    margin: 20px;
+}

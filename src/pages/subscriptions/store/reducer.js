@@ -2,17 +2,13 @@ import { fromJS } from 'immutable';
 import * as constants from './constants';
 
 const defaultState = fromJS({
-    userProfile: {}
+    subscriptionsList: []
 });
-
-
-
-
 
 export default (state =defaultState, action) => {
     switch(action.type){
-        case constants.SET_USER_INFO:
-            return state.set('userProfile',action.result);
+        case constants.SET_SUBSCRIPTIONS_LIST:
+            return state.set('subscriptionsList',action.list);
         default:
             return state;
     }

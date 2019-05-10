@@ -17,7 +17,8 @@ const defaultState = fromJS({
     avatar_img: 'http://pmwmye8w0.bkt.clouddn.com/default-avatar.jpg',
     articleList: [],
     pageSum: '',
-    pageNum: 1
+    pageNum: 1,
+    dynamicList: [],
 });
 
 const changeArticleList=(state,action)=>{
@@ -36,7 +37,24 @@ const changeArticleList=(state,action)=>{
             'pageNum':pageNum
         })
     }
+}
 
+const changeDynamicList=(state,action)=>{
+    const pageSum = action.pageSum; 
+    const pageNum = action.pageNum; 
+    if(pageNum === 1){
+        return state.merge({
+            'dynamicList':action.result,
+            'pageSum':pageSum,
+            'pageNum':pageNum
+        })
+    }else{
+        return state.merge({
+            'dynamicList':state.get('dynamicList').concat(action.result),
+            'pageSum':pageSum,
+            'pageNum':pageNum
+        })
+    }
 }
 
 export default (state =defaultState, action) => {
@@ -59,6 +77,8 @@ export default (state =defaultState, action) => {
             })
         case constants.SET_ARTICLE_LIST:
             return changeArticleList(state,action)
+        case constants.SET_DYNAMIC_LIST:
+            return changeDynamicList(state,action)
         default:
             return state;
     }

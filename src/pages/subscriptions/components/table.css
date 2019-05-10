@@ -1,0 +1,87 @@
+table {
+    width: 625px;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+#basic-table{
+    margin-top: 30px; 
+}
+tr {
+    box-sizing: border-box;
+    height: 85px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(128, 128, 128,0.1);
+    color: rgb(150,150,150);
+}
+#basic-tr1, #basic-tr7,#profile-tr1, #profile-tr6 {
+    border: 0;
+}
+
+.basic-td-left, .profile-td-left {
+    width: 140px;
+}
+.setting-radio {
+    display: inline-block;
+    width: 160px;
+}
+.receive2 {
+    width: 230px;
+}
+.sex{
+    width: 80px;
+}
+#user-photo,.button-in-table {
+    height: 20px;
+    width: 56px;
+    padding: 4px 12px;
+    border: 1px solid rgba(59, 194, 29, 0.7);
+    border-radius: 40px;  
+    font-size: 14px;
+    color: rgb(66, 192, 46);
+    cursor: pointer;
+    text-align: center;
+}
+#user-photo:hover,.button-in-table:hover {
+    border: 1px solid #42c02e;
+    background-color: rgba(59,194,29,.05);
+}
+.submit{
+    width: 76px;
+    margin: 30px 0 30px 0;
+    background-color: #42c02e;
+    color: #fff;
+}
+.submit:hover {
+    background-color: #3db922;
+    color: #fff;
+}
+.setting-input {
+    padding: 10px 10px;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 4px;
+    font-size: 15px;
+    background: rgba(181, 181, 181, 0.1);
+    outline: none;
+}
+#website-input {
+    width: 100%;
+}
+.avatar-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    font-size: 15px;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    background-color: hsla(0,0%,71%,.1);
+    display: block;
+    resize: none;
+    outline-style: none;
+}

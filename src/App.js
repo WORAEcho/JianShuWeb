@@ -3,9 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './common/header';
 import Home from './pages/home';
+//这是啥 加载???
 import Detail from './pages/detail/loadable.js';
 import Login from './pages/login/login.jsx';
 import Register from './pages/login/register.jsx';
+import Subscriptions from './pages/subscriptions/index';
 import UserHome from './pages/home-user/index';
 import UserSetting from './pages/setting-user/index';
 import AllWriters from './pages/all-writers/index';
@@ -21,6 +23,7 @@ class App extends Component {
           <div>
             <Header />
             <Route path='/' exact component={Home}></Route>
+            <Route path='/subscriptions/:type/:id?' exact component={Subscriptions}></Route>
             <Route path='/detail/:id' exact component={Detail}></Route>
             <Route path='/login' exact component={Login}></Route>
             <Route path='/register' exact component={Register}></Route>

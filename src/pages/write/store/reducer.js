@@ -14,7 +14,8 @@ const defaultState = fromJS({
     publishedArticleList: [],
     showModal: false,
     publishingId: '',
-    publishingtitle: ''
+    publishingtitle: '',
+    anthology: []
 });
 
 const changePublishedArticleList=(state,action)=>{
@@ -25,6 +26,13 @@ const changePublishedArticleList=(state,action)=>{
     }
 }
 
+const changeCollectionName=(state,action)=>{
+    const list = state.get('collectionList');
+    const index = list.indexOf(list.find((e) => e.get('id') === action.id))
+    return list.updateIn([index,'collectionName'],()=>action.collectionName)
+}
+
+
 export default (state =defaultState, action) => {
     switch(action.type){
         case constants.CLEAR_STORE:
@@ -33,6 +41,8 @@ export default (state =defaultState, action) => {
             return state.set('showModal',action.status);
         case constants.CHANGE_COLLECTION_LIST:
             return state.set('collectionList',action.collectionList);
+        case constants.CHANGE_COLLECTION_NAME:
+            return state.set('collectionList',changeCollectionName(state,action));
         case constants.CHANGE_ARTICLE_LIST:
             return state.set('articleList',action.articleList);
         case constants.CHANGE_ARTICLE_ID:
@@ -42,6 +52,7 @@ export default (state =defaultState, action) => {
         case constants.CHANGE_CONTENT:
             return state.set('content',action.content);
         case constants.CHANGE_ARTICLE:
+            // console.log('change content: '+action.content)
             return state.merge({
                 articleId: action.id,
                 title: action.title,
@@ -61,7 +72,9 @@ export default (state =defaultState, action) => {
             return state.merge({
                 publishingId: action.id,
                 publishingtitle: action.title,
-            })     
+            })
+        case constants.SET_ANTHLOGYLIST:
+            return state.set('anthology',action.res);  
         default:
             return state;
     }

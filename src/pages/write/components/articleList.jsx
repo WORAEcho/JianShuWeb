@@ -10,7 +10,7 @@ class ArticleList extends PureComponent {
       }
 
     render() {
-        const { articleList,collectionId,articleId,title,myEditor,publishedArticleList,disPublishArticle } =this.props;
+        const { userId,articleList,collectionId,articleId,title,myEditor,publishedArticleList,disPublishArticle } =this.props;
       return (
         <ListContainer className='article'>
             <NewArticle onClick={()=>this.newArticle(collectionId)}>            
@@ -63,7 +63,7 @@ class ArticleList extends PureComponent {
                                         </svg>
                                         </span></li>
                                          :
-                                        <li onClick={()=>this.publishArticle(id,item.get('title'))}><span>
+                                        <li onClick={()=>this.publishArticle(id,item.get('title'),userId)}><span>
                                         发布文章
                                         <svg className="icon" id="publish-icon" aria-hidden="true">
                                             <use xlinkHref="#icon-fabu"></use>
@@ -104,9 +104,9 @@ class ArticleList extends PureComponent {
     deleteArticle(articleId){
         this.props.deleteArticle(articleId,this.props.collectionId,this.props.myEditor);
     }
-    publishArticle(articleId,title){
+    publishArticle(articleId,title,userId){
         if(this.props.publishedArticleList.indexOf(articleId) === -1){
-            this.props.publishArticle(articleId,title);
+            this.props.publishArticle(articleId,title,userId);
         }
     }
     newArticle(collectionId){
@@ -123,7 +123,7 @@ const mapStateToProps = (state) => (
         content: state.getIn(['write', 'content']),
         title: state.getIn(['write', 'title']),
         myEditor: state.getIn(['write', 'myEditor']),
-        user: state.getIn(['login', 'user']),
+        userId: state.getIn(['login', 'userId']),
         publishedArticleList: state.getIn(['write', 'publishedArticleList']),
         showModal: state.getIn(['write', 'showModal']),
     }
@@ -140,8 +140,8 @@ const mapDispatchToProps = (dispatch) => {
         deleteArticle(articleId,collectionId,editor){
             dispatch(actionCreators.deleteArticle(articleId,collectionId,editor));
         },
-        publishArticle(articleId,title){
-            dispatch(actionCreators.publishArticle(articleId,title));
+        publishArticle(articleId,title,userId){
+            dispatch(actionCreators.publishArticle(articleId,title,userId));
             dispatch(actionCreators.toggleModal(true));
         },
         disPublishArticle(articleId){

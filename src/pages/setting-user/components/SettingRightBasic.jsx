@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import Topic from './components/Topic.jsx';
 // import { actionCreators } from '../store';
 import Uploader from '../../../common/uploader/uploader.jsx' 
+import { actionCreators } from '../store';
 import { 
     SettingRightContainer,
  } from './style';
@@ -13,6 +14,7 @@ class SettingRightBasic extends PureComponent {
         photoUrl: this.props.avatarImg
     }
     render(){
+        const { userId,updateBasic,userProfile } = this.props
         return (
             <SettingRightContainer>
                 <table id='basic-table'>
@@ -32,15 +34,10 @@ class SettingRightBasic extends PureComponent {
                             昵称
                         </td>
                         <td>
-                            <input className='setting-input' placeholder='请输入昵称'></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            手机
-                        </td>
-                        <td>
-                            <div className='button-in-table'>点击绑定</div>
+                            <input  className='setting-input' 
+                                    placeholder='请输入昵称' 
+                                    defaultValue={userProfile.nickname} 
+                                    ref={(input)=>{this.nickname = input}}></input>
                         </td>
                     </tr>
                     <tr>
@@ -49,10 +46,10 @@ class SettingRightBasic extends PureComponent {
                         </td>
                         <td>
                             <div className='setting-radio editor'>
-                                <input type='radio' value='rich'></input><span>富文本</span>
+                                <input name='editor' type='radio' value='rich'></input><span>富文本</span>
                             </div>
                             <div className='setting-radio editor'>
-                                <input type='radio' value='markdown'></input><span>Markdown</span>
+                                <input name='editor' type='radio' value='markdown'></input><span>Markdown</span>
                             </div>
                         </td>
                     </tr>
@@ -62,10 +59,10 @@ class SettingRightBasic extends PureComponent {
                         </td>
                         <td>
                             <div className='setting-radio language'>
-                                <input type='radio' value='chinese'></input><span>简体中文</span>
+                                <input name='language' type='radio' value='chinese'></input><span>简体中文</span>
                             </div>
                             <div className='setting-radio language'>
-                                <input type='radio' value='english'></input><span>英文</span>
+                                <input name='language' type='radio' value='english'></input><span>英文</span>
                             </div>
                         </td>
                     </tr>
@@ -75,16 +72,16 @@ class SettingRightBasic extends PureComponent {
                         </td>
                         <td>
                             <div className='setting-radio receive1'>
-                                <input type='radio' value='all'></input><span>所有人</span>
+                                <input name='receive' type='radio' value='all'></input><span>所有人</span>
                             </div>
                             <div className='setting-radio receive2'>
-                                <input type='radio' value='follow'></input><span>我关注的人、我发过简信的人</span>
+                                <input name='receive' type='radio' value='follow'></input><span>我关注的人、我发过简信的人</span>
                             </div>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <div className='button-in-table submit'>保存</div>
+                <div className='button-in-table submit' onClick={()=>updateBasic(userId,this.state.photoUrl,this.nickname.value)}>保存</div>
             </SettingRightContainer>
         )
     }
@@ -99,9 +96,16 @@ class SettingRightBasic extends PureComponent {
 
 const mapState = (state) => ({
     avatarImg: state.getIn(['login','avatarImg']),
+    userId: state.getIn(['login','userId']),
+    userProfile:state.getIn(['userSetting','userProfile'])
 })
 
 const mapDispatch= (dispatch) => ({
+    updateBasic(userId,avatarImg,nickname){
+        avatarImg = avatarImg === '' ? null : avatarImg
+        nickname = nickname === '' ? null : nickname
+        dispatch(actionCreators.updateBasic(userId,avatarImg,nickname));
+    }
     
 })
 export default connect(mapState,mapDispatch)(SettingRightBasic);

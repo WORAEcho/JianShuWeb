@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { DetailWrapper,Header,Content,Author,AuthorBottom,MetaBottom,Supprot,ArticleFoot } from './components/style'
+import { DetailWrapper,Header,Content,Author,MetaBottom,ArticleFoot } from './components/style'
 import { withRouter,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from './store'
@@ -7,12 +7,12 @@ import FollowButton from '../all-writers/components/FollowButton.jsx';
 import LikeButton from './components/LikeButton.jsx';
 import moment from 'moment';
 import CommentSubmit from './components/CommentSubmit.jsx';
+import AuthorCard from './components/AuthorCard.jsx';
 import Comment from './components/Comment.jsx';
 import { Avatar } from '../../common/header/style';
 import PageHelper from '../../common/pageHelper/PageHelper';
 
 class Detail extends PureComponent {
-
     render(){
         const { articleDetail,writerSuvrey,likedList,avatarImg,mainComment,mainCommentPageTotal,mainCommentTotal} =this.props;
         return (
@@ -30,17 +30,16 @@ class Detail extends PureComponent {
                     <div>
                     <span>{moment(articleDetail.update_time).format('YYYY-MM-DD HH:mm:ss')}</span>
                     <span>字数 {articleDetail.word_count}</span>
-                    <span>阅读 999</span>
                     <span>评论 {mainCommentTotal}</span>
                     <span>喜欢 {likedList.length}</span>
                     </div>
                     </div>
                 </Author>
                 <Content dangerouslySetInnerHTML={{__html: articleDetail.content}} />
-                <Supprot>
+                {/* <Supprot>
                     <p>小礼物走一走，来简书关注我</p>
                     <div className='support-button'>赞赏支持</div>
-                </Supprot>
+                </Supprot> */}
                 <ArticleFoot>
                     <svg className='icon' aria-hidden="true">
                         <use xlinkHref='#icon-wenji'></use>
@@ -49,45 +48,43 @@ class Detail extends PureComponent {
                     <span className='copyright'>©著作权归作者所有</span>
                     <span className='report'>举报文章</span>
                 </ArticleFoot>
-
-                <AuthorBottom>
-                    <Link to={'/userhome/'+articleDetail.userId}><Avatar src={articleDetail.avatar_img}></Avatar></Link>
-                    <div style={{display: 'inline-block',marginLeft: '8px'}}>
-                    <Link to={'/userhome/'+articleDetail.userId} style={{textDecoration: 'none'}}>
-                          <span className='author-name'>{articleDetail.nickname}</span>
-                    </Link>
-                    <svg className='icon' aria-hidden="true">
-                            <use xlinkHref={articleDetail.gender === 1 ? "#icon-nan" : "#icon-nv"}></use>
-                    </svg>
-                    <div>
-                    <span>写了 {writerSuvrey.totalWordCount} 字, </span>
-                    <span>被 {writerSuvrey.fansNum} 人关注, </span>
-                    <span>获得了 {writerSuvrey.totalLikeCount} 个喜欢</span>
-                    </div>
-                    </div>
-                    <FollowButton className='follow-button' id='follow-button' writerId={articleDetail.userId}>关注</FollowButton>
-                </AuthorBottom>
+                <div style={{margin: '20px 0 40px 0'}}>
+                    <AuthorCard userId={articleDetail.userId}
+                                avatarImg={articleDetail.avatar_img}
+                                nickname={articleDetail.nickname}
+                                gender={articleDetail.gender}
+                                profile={articleDetail.profile}
+                                totalWordCount={writerSuvrey.totalWordCount}
+                                fansNum={writerSuvrey.fansNum}
+                                totalLikeCount={writerSuvrey.totalLikeCount}
+                    ></AuthorCard>
+                </div>
                 <MetaBottom>
                     <LikeButton articleId={this.props.match.params.id}></LikeButton>
+                    {/* {console.log(this.props.match)} */}
                     <div className='share'>
-                        <div className='share-circle'> 
+                        {/* <div className='share-circle'> 
                             <svg className='icon' aria-hidden="true">
                                 <use xlinkHref='#icon-weixin'></use>
                             </svg>
-                        </div>
+                        </div> */}
+                        <a href={'http://service.weibo.com/share/share.php?url=http://192.168.57.1:3000'+this.props.match.url+'&sharesource=weibo&title='+articleDetail.title} target="_blank" rel="noopener noreferrer">
                         <div className='share-circle'> 
                             <svg className='icon' aria-hidden="true">
                                 <use xlinkHref='#icon-weibo'></use>
                             </svg>
                         </div>
+                        </a>
+                        <a href={'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=192.168.57.1:3000'+this.props.match.url+'&sharesource=qzone&title='+articleDetail.title} target="_blank" rel="noopener noreferrer">
                         <div className='share-circle'> 
                             <svg className='icon' aria-hidden="true">
                                 <use xlinkHref='#icon-qqkongjian'></use>
                             </svg>
                         </div>
-                        <div className='share-circle' id='more-share'> 
+                        </a>
+                        {/* <div className='share-circle' id='more-share'> 
                             更多分享
-                        </div>
+                        </div> */}
                     </div>
                 </MetaBottom>
                 <div>
@@ -96,7 +93,7 @@ class Detail extends PureComponent {
                 </div>
 
                 <div>
-                <div style={{margin:'30px 0 20px 0',fontSize: '17px',fontWeight: '700'}}>精彩评论（{mainCommentTotal}）</div>
+                <div style={{margin:'30px 0 20px 0',fontSize: '17px',fontWeight: '700'}}>评论（{mainCommentTotal}）</div>
                 </div>
                 {
                     mainComment.valueSeq().map((item)=>{
@@ -132,7 +129,7 @@ class Detail extends PureComponent {
 
     componentDidUpdate(prevProps) {
         const {userId,getMainComment,match} = this.props
-        if (this.props.userId !== prevProps.userId) {
+        if (userId !== prevProps.userId) {
             getMainComment(1,match.params.id,userId);
         }
       }

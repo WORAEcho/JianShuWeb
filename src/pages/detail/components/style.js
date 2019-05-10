@@ -48,7 +48,6 @@ export const AuthorBottom = styled.div`
     background-color: hsla(0,0%,71%,.1);
     border: 1px solid #e1e1e1;
     border-radius: 4px;
-    margin: 20px 0 40px 0;
     .icon {
         font-size: 14px;
         margin: 0;
@@ -69,6 +68,15 @@ export const AuthorBottom = styled.div`
         float: right;
         display: inline-block;
 
+    }
+    .profile {
+        margin-top: 30px;
+        padding-top: 10px;
+        border-top: 1px solid #e1e1e1;
+        color: #969696;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     span {
         color: #969696;
@@ -95,16 +103,8 @@ export const MetaBottom = styled.div`
             .icon {
                 font-size: 28px;
             }
-            &#more-share {
-                width: auto;
-                border-radius: 50px;
-                padding: 4px 18px;
-                font-size: 14px;
-                color: #9b9b9b;
-                line-height: 40px;
-            }
             :hover {
-                cursor: not-allowed;
+                cursor: pointer;
                 background-color: hsla(0,0%,71%,.1);
             }
         }

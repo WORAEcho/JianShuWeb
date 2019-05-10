@@ -23,7 +23,6 @@ class FollowButton extends PureComponent {
                 {unFollowed ? '关注' : this.state.unfollowState ? '取消关注' : '已关注'}
             </Followbutton>     
         )
-
     }
 
     changeFollow(userId,writerId,unFollowed){

@@ -4,7 +4,10 @@ import * as constants from './constants';
 const defaultState = fromJS({
     userList: [],
     articleList: [],
-    totalPage: 0
+    anthologyList: [],
+    articleTotalPage: 0,
+    userTotalPage: 0,
+    anthologyTotalPage: 0
 });
 
 export default (state =defaultState, action) => {
@@ -12,12 +15,17 @@ export default (state =defaultState, action) => {
         case constants.SET_ARTICLE_LIST:
             return state.merge({
                 'articleList': action.result,
-                'totalPage': action.totalPage
+                'articleTotalPage': action.totalPage
             })
         case constants.SET_USER_LIST:
             return state.merge({
                 'userList': action.result,
-                'totalPage': action.totalPage
+                'userTotalPage': action.totalPage
+            })
+        case constants.SET_ANTHOLOGY_LIST:
+            return state.merge({
+                'anthologyList': action.result,
+                'anthologyTotalPage': action.totalPage
             })
         default:
             return state;

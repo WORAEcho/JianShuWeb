@@ -26,6 +26,7 @@ class Header extends Component {
     
     state = {
         showMenu: false,
+        selected: 'home'
       }
 
     getListArea(){
@@ -35,7 +36,7 @@ class Header extends Component {
         if(jsList.length){
             for (let i = (page-1) * 10; i < page * 10; i++) {
                 pageList.push(
-                    <Link key={jsList[i]} target="_blank" to={'search?fuzzyKey='+jsList[i]+'&pageNum=1'}>
+                    <Link key={jsList[i]} target="_blank" to={'/search?fuzzyKey='+jsList[i]+'&pageNum=1'}>
                     <SearchInfoItem>{jsList[i]}</SearchInfoItem>
                     </Link>
                 )
@@ -70,20 +71,42 @@ class Header extends Component {
         const { list,focused,handleInputBlur,handleInputFocus,login,avatarImg,userId} = this.props
         return (
             <HeaderWrapper>
-                <Link to='/'><Logo /></Link>
+                <Link to='/'><Logo/></Link>
                 <Nav>
-                
                     <Link to='/'>
-                    <NavItem className='left active'>
-                        <span className="iconfont">&#xe61f;</span>
-                        首页
-                    </NavItem>
+                        <NavItem className={this.state.selected==='home' ? 'left active' : 'left'} 
+                                onClick={()=>this.setSelected('home')}
+                        >
+                            <span className="iconfont">&#xe61f;</span>
+                            首页
+                        </NavItem>
                     </Link>
-                    <NavItem className='left'>
-                        <span className="iconfont">&#xe641;</span>
+                    {/* <NavItem className='left'>
+                        <span className="iconfont" style={{fontSize:'23px'}}>&#xe641;</span>
                         下载App
-                    </NavItem>
-                    
+                    </NavItem> */}
+                    {
+                        login ? 
+                        <Link to='/subscriptions/timeline'> 
+                            <NavItem className={this.state.selected==='subspt' ? 'left active' : 'left'} 
+                                    onClick={()=>this.setSelected('subspt')}
+                            >
+                                <span className="iconfont" style={{fontSize:'24px',paddingRight:'3px'}}>&#xe618;</span>
+                                关注
+                            </NavItem>
+                        </Link> :
+                        null
+                    }
+                    {
+                        login ?  
+                            <NavItem className={this.state.selected==='mess' ? 'left active' : 'left'} 
+                                    onClick={()=>this.setSelected('mess')}
+                            >
+                                <span className="iconfont">&#xe630;</span>
+                                消息
+                            </NavItem> :
+                        null
+                    }
                     {
                         login ?  null :
                         <Link to='/login'><NavItem className='right'>登录</NavItem></Link>
@@ -113,7 +136,7 @@ class Header extends Component {
                                 &#xe62b;
                             </span> :
                             <Link target="_blank" 
-                                  to={'search?fuzzyKey='+this.fuzzyKey.value+'&pageNum=1'} 
+                                  to={'/search?fuzzyKey='+this.fuzzyKey.value+'&pageNum=1'} 
                             >
                             <span className={focused ? 'focused iconfont zoom': 'iconfont zoom'}>
                                 &#xe62b;
@@ -201,6 +224,11 @@ class Header extends Component {
     toggleMenu(res){
         this.setState({
             showMenu: res
+        })
+    }
+    setSelected(res){
+        this.setState({
+            selected:  res
         })
     }
 }

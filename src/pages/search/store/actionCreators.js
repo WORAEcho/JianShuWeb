@@ -16,6 +16,13 @@ const setUserList = (result,totalPage) => ({
     totalPage
 })
 
+const setAnthologyList = (result,totalPage) => ({
+    type: constants.SET_ANTHOLOGY_LIST,
+    result,
+    totalPage
+})
+
+
 export const getArticleList = (fuzzyKey,pageNum) => {
     return (dispatch) => {
         axios.get(URL+'article/published/profile/fuzzy?fuzzyKey='+fuzzyKey+'&pageNum='+pageNum+'&pageSize=10').then((res) =>{
@@ -39,3 +46,15 @@ export const getUserList = (fuzzyKey,pageNum) => {
         });
     }
 }
+export const getAnthologyList = (fuzzyKey,pageNum) => {
+    return (dispatch) => {
+        axios.get(URL+'anthology/fuzzy?key='+fuzzyKey+'&pageNum='+pageNum).then((res) =>{
+            const result=res.data.list;
+            const totalPage=res.data.pages;
+            dispatch(setAnthologyList(fromJS(result),totalPage))
+        }).catch(()=>{
+            console.log('模糊查询专题列表失败！')
+        });
+    }
+}
+
