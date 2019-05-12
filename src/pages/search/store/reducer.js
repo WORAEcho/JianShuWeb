@@ -7,7 +7,9 @@ const defaultState = fromJS({
     anthologyList: [],
     articleTotalPage: 0,
     userTotalPage: 0,
-    anthologyTotalPage: 0
+    anthologyTotalPage: 0,
+    articleTotalNum: 0,
+    userTotalNum: 0
 });
 
 export default (state =defaultState, action) => {
@@ -15,12 +17,14 @@ export default (state =defaultState, action) => {
         case constants.SET_ARTICLE_LIST:
             return state.merge({
                 'articleList': action.result,
-                'articleTotalPage': action.totalPage
+                'articleTotalPage': action.totalPage,
+                'articleTotalNum': action.articleTotalNum
             })
         case constants.SET_USER_LIST:
             return state.merge({
                 'userList': action.result,
-                'userTotalPage': action.totalPage
+                'userTotalPage': action.totalPage,
+                'userTotalNum': action.userTotalNum
             })
         case constants.SET_ANTHOLOGY_LIST:
             return state.merge({

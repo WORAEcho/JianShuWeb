@@ -62,7 +62,7 @@ class CommentSubmit extends PureComponent {
         }
     }
     submitComment(commentType,articleId,userId,content){
-        const {commentId,parentId,quotedUserId,submitComment,submitReply,toggleReply} = this.props
+        const {commentId,parentId,quotedUserId,submitComment,submitReply,toggleReply,commentPageNum} = this.props
         if(toggleReply !== undefined){
             toggleReply(true)
         }
@@ -70,7 +70,7 @@ class CommentSubmit extends PureComponent {
             alert('回复内容不能为空');
         }else{
             if(commentType === 1){
-                submitComment(articleId,userId,content)
+                submitComment(articleId,userId,content,commentPageNum)
             }else{
                 submitReply(commentId,parentId,articleId,userId,content,quotedUserId)
             }
@@ -93,8 +93,8 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) =>({
-    submitComment(articleId,userId,content){
-        dispatch(actionCreators.submitComment(articleId,userId,content))
+    submitComment(articleId,userId,content,commentPageNum){
+        dispatch(actionCreators.submitComment(articleId,userId,content,commentPageNum))
     },
     submitReply(commentId,parentId,articleId,userId,content,quotedUserId){
         dispatch(actionCreators.submitReply(commentId,parentId,articleId,userId,content,quotedUserId))

@@ -16,7 +16,7 @@ class HomeUserLeft extends PureComponent {
         menu:'article' 
     })
     render(){
-        const { writerId,followedNum,fansNum,articleNum,likeNum,wordCount,nickname,gender,avatarImg } = this.props;
+        const { userId,writerId,followedNum,fansNum,articleNum,likeNum,wordCount,nickname,gender,avatarImg } = this.props;
         return (
             <HomeLeft>
                 <Head>
@@ -29,10 +29,12 @@ class HomeUserLeft extends PureComponent {
                         <use xlinkHref={ gender === 1 ? "#icon-nan" : "#icon-nv"}></use>
                     </svg>
                     </UserName>
-                    <div style={{float: 'right'}}>
+                    <div style={{float: 'right',paddingRight: '50px'}}>
+                    {
+                        userId === writerId ? null :
                         <FollowButton id='button-follow' writerId={writerId}>                                    
                         </FollowButton>
-                        <Followbutton className='button chat'>发简信</Followbutton>
+                    }
                     </div>
                     <BlockWrapper>
                         <Block><Num>{followedNum}</Num>关注

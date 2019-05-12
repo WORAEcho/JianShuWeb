@@ -34,6 +34,14 @@ const setDynamicList = (result,pageSum,pageNum) =>({
     pageSum,
     pageNum
 })
+const setCollectionList = (result) =>({
+    type: constants.SET_COLLECTION_LIST,
+    result,
+})
+const setAnthologyList = (result) =>({
+    type: constants.SET_ANTHOLOGY_LIST,
+    result,
+})
 
 export const getProfile = (userId) => {
     return (dispatch) => {
@@ -99,6 +107,28 @@ export const getUserAction = (userId,pageNum,pageSize) => {
             dispatch(setDynamicList(fromJS(result),fromJS(pageSum),fromJS(pageNum+1)))
         }).catch(()=>{
             console.log('请求用户动态失败')
+        });
+    }
+}
+
+export const getCollectionList = (userId) => {
+    return (dispatch) => {
+        axios.get(URL+'collection/'+userId).then((res) =>{
+            const result=res.data;
+            dispatch(setCollectionList(fromJS(result)))
+        }).catch(()=>{
+            console.log('请求用户文集失败')
+        });
+    }
+}
+export const getAnthologyList = (userId) => {
+    return (dispatch) => {
+        axios.get(URL+'anthology/'+userId).then((res) =>{
+            const result=res.data;
+            console.log(result)
+            dispatch(setAnthologyList(fromJS(result)))
+        }).catch(()=>{
+            console.log('请求用户文集失败')
         });
     }
 }

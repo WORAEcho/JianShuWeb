@@ -42,6 +42,14 @@ export const changeRePassword = (data) =>({
     type: constants.CHANGE_REGISTER_RE_PASSWORD,
     value: data
 });
+export const setLoginFail = (state) =>({
+    type: constants.SET_LOGIN_FAIL,
+    state: state
+});
+export const setRegisterFail = (state) =>({
+    type: constants.SET_REGISTER_FAIL,
+    state: state
+});
 
 export const resetState = (data) =>{
     switch(data){
@@ -63,8 +71,9 @@ export const login = (account, password,checked) => {
             if(res.data.code === 200){
                 localStorage.setItem('token', res.data.token)
                 dispatch(getUserInfo(account));
+                dispatch(setLoginFail(false));
             }else{
-                alert('登陆失败！')
+                dispatch(setLoginFail(true));
             }
             // switch(res.data){
             //     case 1: dispatch(getUserInfo(account));break;
@@ -100,7 +109,7 @@ export const register = (account, password) => {
             "password":password
         }).then((res) => {
             if(res.data === 1){
-                alert("注册成功！")
+                alert('注册成功')
                 dispatch(changeRegister());
             }else{
                 alert('注册失败')

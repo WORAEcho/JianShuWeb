@@ -69,6 +69,7 @@ export const InputContainer = styled.div`
         float: left
         margin: 9px 5px;
         font-size: 25px;
+        color: #969696;
     }
     .psw {
         margin: 9px 6px 10px 8px;

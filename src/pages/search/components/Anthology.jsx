@@ -42,7 +42,7 @@ class Anthology extends PureComponent {
                                 <span className='search-userlist-meta'>写了 {item.get('wordNum')} 字，获得了 {item.get('likeNum')} 个喜欢。</span>
                             </div> */}
                             </div>
-                            <FollowButton></FollowButton>
+                            <FollowButton>投稿</FollowButton>
                             </ListInfo>
                             </ListItem>
                         );

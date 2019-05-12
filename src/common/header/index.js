@@ -112,9 +112,9 @@ class Header extends Component {
                         <Link to='/login'><NavItem className='right'>登录</NavItem></Link>
                     }
                     
-                    <NavItem className='right'>
+                    {/* <NavItem className='right'>
                     <i className="iconfont">&#xe636;</i>
-                    </NavItem>
+                    </NavItem> */}
 
                     <SearchWrapper>
                         <CSSTransition

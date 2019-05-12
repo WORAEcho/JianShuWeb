@@ -11,8 +11,10 @@ import AuthorCard from './components/AuthorCard.jsx';
 import Comment from './components/Comment.jsx';
 import { Avatar } from '../../common/header/style';
 import PageHelper from '../../common/pageHelper/PageHelper';
-
 class Detail extends PureComponent {
+    state=({
+        commentPageNum: 1
+    })
     render(){
         const { articleDetail,writerSuvrey,likedList,avatarImg,mainComment,mainCommentPageTotal,mainCommentTotal} =this.props;
         return (
@@ -89,7 +91,7 @@ class Detail extends PureComponent {
                 </MetaBottom>
                 <div>
                 <Avatar src={avatarImg} style={{margin: '0'}}></Avatar>
-                <CommentSubmit commentType={1}></CommentSubmit>
+                <CommentSubmit commentType={1} commentPageNum={this.state.commentPageNum}></CommentSubmit>
                 </div>
 
                 <div>
@@ -109,7 +111,7 @@ class Detail extends PureComponent {
                 {
                     mainCommentPageTotal <= 1 ? null :
                     <PageHelper pageTotal={mainCommentPageTotal} 
-                                getMainCommentByPageNum={(pageNum)=>this.getMainCommentByPageNum(pageNum)}
+                                getInfo={(pageNum)=>this.getMainCommentByPageNum(pageNum)}
                     ></PageHelper>
                 }
                 </div>
@@ -118,6 +120,9 @@ class Detail extends PureComponent {
     }
 
     getMainCommentByPageNum(pageNum){
+        this.setState({
+            commentPageNum: pageNum
+        })
         this.props.getMainComment(pageNum,this.props.match.params.id,this.props.userId);
     }
 

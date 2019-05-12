@@ -47,7 +47,7 @@ class PageHelper extends PureComponent {
             this.setState({
                 activePage:item
             })
-            this.props.getMainCommentByPageNum(item);
+            this.props.getInfo(item);
         }
     }
     
@@ -106,7 +106,16 @@ class PageHelper extends PureComponent {
     }
 
     componentDidMount(){
+
         this.initPageHelperBar()
+    }
+    componentDidUpdate(prevProps){
+        if(this.props.initActivePageFlag === true){
+            console.log("init")
+            this.setState({
+                activePage: 1
+            })
+        }
     }
 
 }

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Redirect,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actionCreators } from './store';
+import HintInfoBox from '../../common/hintInfoBox/HintInfoBox.jsx';
 import { 
     LoginWrapper,
     LoginBox,
@@ -16,81 +17,98 @@ import {
 
 
 class Register extends PureComponent {
+
     render(){
-        const { registerStatus,usernameStatus,passwordStatus,rePasswordStatus } =this.props;
+        const { registerFail,registerStatus,usernameStatus,passwordStatus,rePasswordStatus } =this.props;
         if(!registerStatus){
-        return (
-            <LoginWrapper>
-                <LoginBox>
-                    <TitleContainer>
-                    <Link to='/login'>
-                        <Title className='title' >登录</Title>
-                    </Link>
-                    <Title className='point'><b>·</b></Title>
-                    <Link to='/register'>
-                        <Title className='title active' >注册</Title>
-                    </Link>
-                    </TitleContainer>
-                    <InputContainer className='top'>
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-yonghuming-copy"></use>
-                        </svg>
-                    <Input placeholder='账号' onFocus={()=>this.props.resetState("username")} onBlur={()=>this.props.checkUsername(this.account)} ref={(input)=>{this.account = input}}></Input>
-                    </InputContainer>
-                    { (usernameStatus === 0 || usernameStatus === 2) ? null : ( usernameStatus === 1 ? 
-                        <CheckInfo className="username">
+            return (
+                <LoginWrapper>
+                    {
+                        registerFail ? <HintInfoBox value={'请按要求填写注册信息'}></HintInfoBox> : null
+                    }
+                    <LoginBox>
+                        <TitleContainer>
+                        <Link to='/login'>
+                            <Title className='title' >登录</Title>
+                        </Link>
+                        <Title className='point'><b>·</b></Title>
+                        <Link to='/register'>
+                            <Title className='title active' >注册</Title>
+                        </Link>
+                        </TitleContainer>
+                        <InputContainer className='top'>
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref="#icon-yonghuming-copy"></use>
+                            </svg>
+                        <Input placeholder='账号' onFocus={()=>this.props.resetState("username")} onBlur={()=>this.props.checkUsername(this.account)} ref={(input)=>{this.account = input}}></Input>
+                        </InputContainer>
+                        { (usernameStatus === 0 || usernameStatus === 2) ? null : ( usernameStatus === 1 ? 
+                            <CheckInfo className="username">
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-jingshi-copy"></use>
+                                </svg>
+                                <span className="checkInfoContent">该用户名已被使用，换一个吧。</span>
+                            </CheckInfo> : 
+                            <CheckInfo className="username">
                             <svg className="icon" aria-hidden="true">
                                 <use xlinkHref="#icon-jingshi-copy"></use>
                             </svg>
-                            <span className="checkInfoContent">该用户名已被使用，换一个吧。</span>
-                        </CheckInfo> : 
-                        <CheckInfo className="username">
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-jingshi-copy"></use>
-                        </svg>
-                        <span className="checkInfoContent">用户名格式不正确，需要4-16个字符,只能包含字母、数字、下划线、减号。</span>
-                        </CheckInfo>
-                        )
-                    }
-                    <InputContainer className='mid'>
-                        <svg className="icon psw" aria-hidden="true">
-                            <use xlinkHref="#icon-ai-password-copy"></use>
-                        </svg>
-                    <Input placeholder='密码' onFocus={()=>this.props.resetState("password")} onBlur={()=>this.props.checkPassword(this.password)} ref={(input)=>{this.password = input}} type='password' ></Input>
-                    </InputContainer>
-                    { (passwordStatus === 0 || passwordStatus ===2) ? null :
-                        <CheckInfo className="password">
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-jingshi-copy"></use>
-                        </svg>
-                        <span className="checkInfoContent">密码格式不正确，需要6-18个字符，必须包含字母和数字和特殊符号。</span>
-                        </CheckInfo>
-                    }
-                    <InputContainer className='bottom'>
-                        <svg className="icon psw" aria-hidden="true">
-                            <use xlinkHref="#icon-ai-password-copy"></use>
-                        </svg>
-                    <Input placeholder='确认密码' onFocus={()=>this.props.resetState("rePassword")} onBlur={()=>this.props.checkRePassword(this.rePassword,this.password)} ref={(input)=>{this.rePassword = input}} type='password' ></Input>
-                    </InputContainer>
-                    { (rePasswordStatus === 0 || rePasswordStatus ===2) ? null :
-                        <CheckInfo className="rePassword"> 
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-jingshi-copy"></use>
-                        </svg>
-                        <span className="checkInfoContent">两次密码不一致，请重新输入。</span>
-                        </CheckInfo>
-                    }
-                    <Button className='register' onClick={() => this.props.register(this.account,this.password)}>
-                        <span>注册</span>
-                    </Button>
-                </LoginBox>
-            </LoginWrapper>
-        )
+                            <span className="checkInfoContent">用户名格式不正确，需要4-16个字符,只能包含字母、数字、下划线、减号。</span>
+                            </CheckInfo>
+                            )
+                        }
+                        <InputContainer className='mid'>
+                            <svg className="icon psw" aria-hidden="true">
+                                <use xlinkHref="#icon-ai-password-copy"></use>
+                            </svg>
+                        <Input placeholder='密码' onFocus={()=>this.props.resetState("password")} onBlur={()=>this.props.checkPassword(this.password)} ref={(input)=>{this.password = input}} type='password' ></Input>
+                        </InputContainer>
+                        { (passwordStatus === 0 || passwordStatus ===2) ? null :
+                            <CheckInfo className="password">
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref="#icon-jingshi-copy"></use>
+                            </svg>
+                            <span className="checkInfoContent">密码格式不正确，需要6-18个字符，必须包含字母和数字和特殊符号。</span>
+                            </CheckInfo>
+                        }
+                        <InputContainer className='bottom'>
+                            <svg className="icon psw" aria-hidden="true">
+                                <use xlinkHref="#icon-ai-password-copy"></use>
+                            </svg>
+                        <Input placeholder='确认密码' onFocus={()=>this.props.resetState("rePassword")} onBlur={()=>this.props.checkRePassword(this.rePassword,this.password)} ref={(input)=>{this.rePassword = input}} type='password' ></Input>
+                        </InputContainer>
+                        { (rePasswordStatus === 0 || rePasswordStatus ===2) ? null :
+                            <CheckInfo className="rePassword"> 
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref="#icon-jingshi-copy"></use>
+                            </svg>
+                            <span className="checkInfoContent">两次密码不一致，请重新输入。</span>
+                            </CheckInfo>
+                        }
+                        <Button className='register' onClick={() => this.register(this.account,this.password)}>
+                            <span>注册</span>
+                        </Button>
+                    </LoginBox>
+                </LoginWrapper>
+            )
         }else {
             return <Redirect to='/login' />
         }
 
     }
+
+    register(accountElem,passwordElem){
+        const account =  accountElem.value
+        const password =  passwordElem.value
+        const { usernameStatus,passwordStatus,rePasswordStatus,register,setRegisterFail } =this.props;
+        if( usernameStatus === 2 && passwordStatus === 2 && rePasswordStatus === 2){
+            register(account,password)
+            setRegisterFail(false)
+        }else{
+            setRegisterFail(true)
+        }
+    }
+
 }
 
 const mapState = (state) => ({
@@ -98,12 +116,13 @@ const mapState = (state) => ({
     registerStatus: state.getIn(['login','register']),
     usernameStatus: state.getIn(['login','register_username']),
     passwordStatus: state.getIn(['login','register_password']),
-    rePasswordStatus: state.getIn(['login','register_re_password'])
+    rePasswordStatus: state.getIn(['login','register_re_password']),
+    registerFail: state.getIn(['login','registerFail'])
 });
 
 const mapDispatch = (dispatch) =>({
-    register(accountElem,passwordElem){
-        dispatch(actionCreators.register(accountElem.value,passwordElem.value))
+    register(account,password){
+        dispatch(actionCreators.register(account,password))
     },
     checkUsername(accountElem){
         const account = accountElem.value;
@@ -137,7 +156,11 @@ const mapDispatch = (dispatch) =>({
             dispatch(actionCreators.changeRePassword(3));
         };
     },
+    setRegisterFail(state){
+        dispatch(actionCreators.setRegisterFail(state))
+    },
     resetState(data){
+        dispatch(actionCreators.setRegisterFail(false))
         dispatch(actionCreators.resetState(data))
     },
 });

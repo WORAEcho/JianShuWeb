@@ -19,6 +19,8 @@ const defaultState = fromJS({
     pageSum: '',
     pageNum: 1,
     dynamicList: [],
+    collectionList: [],
+    anthologyList: []
 });
 
 const changeArticleList=(state,action)=>{
@@ -79,6 +81,10 @@ export default (state =defaultState, action) => {
             return changeArticleList(state,action)
         case constants.SET_DYNAMIC_LIST:
             return changeDynamicList(state,action)
+        case constants.SET_COLLECTION_LIST:
+            return state.set('collectionList',action.result)
+        case constants.SET_ANTHOLOGY_LIST:
+            return state.set('anthologyList',action.result)
         default:
             return state;
     }

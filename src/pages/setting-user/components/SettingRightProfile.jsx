@@ -186,7 +186,7 @@ class SettingRightProfile extends PureComponent {
                         </td>
                         <td>
                             {
-                                userProfile.email === null || userProfile.phone === undefined ? 
+                                userProfile.email === null || userProfile.email === undefined ? 
                                 <div className='button-in-table' style={{display:'inline-block'}} onClick={()=>this.toggleEmailModal(true)}>点击绑定</div>
                                 :
                                 <span>{userProfile.email}</span>

@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { actionCreators } from './store';
-import { HomeWrapper,HomeRight } from '../home/components/style';
+import { HomeWrapper } from '../home/components/style';
 import HomeUserLeft from './components/HomeUserLeft'
-
+import HomeUserRight from './components/HomeUserRight'
 class UserHome extends PureComponent {
     // gender,profile,website,email,qdcodeImg,
 
@@ -11,7 +11,7 @@ class UserHome extends PureComponent {
         return (
             <HomeWrapper>
                 <HomeUserLeft writerIdFromPath={parseInt(this.props.match.params.id)}></HomeUserLeft>
-                <HomeRight></HomeRight>
+                <HomeUserRight userId={parseInt(this.props.match.params.id)}></HomeUserRight>
             </HomeWrapper>
         )
     }
@@ -34,10 +34,6 @@ const mapState = (state) => ({
     wordCount: state.getIn(['userHome','wordCount']),
     nickname: state.getIn(['userHome','nickname']),
     gender: state.getIn(['userHome','gender']),
-    profile: state.getIn(['userHome','profile']),
-    website: state.getIn(['userHome','website']),
-    email: state.getIn(['userHome','email']),
-    qdcodeImg: state.getIn(['userHome','qdcodeImg']),
     avatarImg: state.getIn(['userHome','avatarImg']),
 })
 

@@ -9,6 +9,14 @@ export const getUrlParam = (param) => {
         return null;
     }
 }
+export const getUrlLastPathParam = () => {
+    let arr =window.location.pathname.split('/')
+    if (arr !== null){
+        return arr[arr.length-1]
+    }else{
+        return null;
+    }
+}
 
 export const dateDiff = (timestamp)=>{
     var arrTimestamp = (timestamp + '').split('');

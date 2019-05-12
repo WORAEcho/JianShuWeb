@@ -47,9 +47,7 @@ const changeMainComment = (parentId) => ({
 export const getDetail = (articleId) => {
     return (dispatch) =>{
         axios.get(URL+'article/'+articleId+'/published/profile').then((res)=>{
-            console.log(articleId)
             const result=res.data;
-            console.log(res)
             dispatch(changeDetail(result));
             axios.get(URL+'writer/'+result.userId+'/survey').then((res)=>{
                 const survey=res.data;
@@ -105,7 +103,7 @@ export const toggleLike = (articleId,userId,ifLiked) => {
     }
 }
 
-export const submitComment = (articleId,userId,content) => {
+export const submitComment = (articleId,userId,content,commentPageNum) => {
     return (dispatch) =>{
         axios.post(URL+'article/comment',{
             'parentId':0,
@@ -116,7 +114,8 @@ export const submitComment = (articleId,userId,content) => {
         }).then((res)=>{
             const result=res.data;
             if(result === 1){
-                dispatch(getMainComment(1,articleId,userId))
+                console.log(commentPageNum)
+                dispatch(getMainComment(commentPageNum,articleId,userId))
             }
         }).catch(()=>{
             alert('添加评论失败')

@@ -33,3 +33,17 @@ export const RightContent = styled.div`
         float: right;
     }
 `;
+
+export const NotFoundResourse = styled.div`
+    margin-top: 150px;
+    text-align: center;
+    .not-found-img {
+        width:100px;
+        height:87px;
+    }
+    .not-found-hint {
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+`;

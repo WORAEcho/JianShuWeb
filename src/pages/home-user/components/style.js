@@ -136,3 +136,43 @@ export const DynamicHeaderWrapper =styled.div`
         vertical-align: middle;
     }
 `;
+
+export const ProfileBox =styled.div`
+    box-sizing: border-box;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    font-size: 14px;
+    color: #969696;
+`;
+
+export const ProfileContent =styled.div`
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-top: 15px;
+    font-size: 14px;
+    color: #333;
+    .icon {
+        margin: 0;
+        font-size: 14px;
+        color: #969696;
+        padding-right: 5px;
+    }
+    img {
+        float: left;
+        padding: 10px 0;
+        margin-right: 5px;
+        width: 36px;
+        height: 36px;
+    }
+    .anthologyName {
+        float: left;
+        height: 56px;
+        line-height: 56px;
+        display: inline-block;
+    }
+`;
+
+export const ProfileTitle =styled.div`
+    box-sizing: border-box;
+    padding-top: 15px;
+`;
